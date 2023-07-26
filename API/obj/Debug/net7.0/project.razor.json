@@ -1,0 +1,20 @@
+{
+  "SerializedFilePath": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\obj\\Debug\\net7.0\\project.razor.json",
+  "FilePath": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+  "Configuration": {
+    "ConfigurationName": "MVC-3.0",
+    "LanguageVersion": "6.0",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-3.0"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 1100
+  },
+  "RootNamespace": "API",
+  "Documents": [],
+  "SerializationFormat": "0.3"
+}
