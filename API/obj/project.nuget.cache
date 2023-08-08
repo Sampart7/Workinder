@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u/ubOOXcb2+ffAwbrWOtPr2J+prRayb5nfDJM81TsDvQJr7dtWZluEfSkDkNaWpE9tuT17mbQGe+OAh1/TtnGA==",
+  "dgSpecHash": "lVsp57sCSD3TwpRvV4LlaSuFkD8PuNmhyKYjQGwnzxLu95Lj5Fe4v64O5WTdgSdjL+i1JMwA/PD99bV98NT2rQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Michał Janaszek\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Michał Janaszek\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

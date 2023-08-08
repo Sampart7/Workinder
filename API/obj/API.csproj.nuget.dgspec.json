@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj": {}
+    "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj": {
+    "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Michał Janaszek\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\obj\\",
+        "outputPath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Michał Janaszek\\AppData\\Roaming\\NuGet\\NuGet.Config"
