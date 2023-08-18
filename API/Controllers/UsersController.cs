@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -20,11 +16,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            var users = await _ctx.Users.ToListAsync();
-
-            return users;
+            return await _ctx.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]

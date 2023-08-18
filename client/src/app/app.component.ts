@@ -19,17 +19,10 @@ export class AppComponent implements OnInit {
     this.setCurrentUser();
   }
 
-  getUsers() {
-    this.http.get("https://localhost:5001/api/users").subscribe({
-      next: response => {
-        this.users = response;
-      },
-      error: error => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log("Request has completed");
-      }
+  getUsers(){
+    this.http.get('https://localhost:5001/api/users').subscribe({
+        next: (result:any) => {this.users = result},
+        error: (error:any) => {console.log(error)}
     })
   }
 

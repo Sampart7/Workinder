@@ -59,7 +59,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.20": {
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.21": {
         "type": "package",
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.10.0"
@@ -1312,10 +1312,10 @@
         "logo.png"
       ]
     },
-    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.20": {
-      "sha512": "+h9mLcUvoCafhAInfALHd2H1oelu3F31GbY83dEkJzqCKdP34x6hSvB5uj9wF/JowLosD6+ZMcPlU+nogka+mg==",
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.21": {
+      "sha512": "EZfFWxMTd2Su5kfhaL5gIhEGANVcBV89qQX4nu/akSQNutW4AjfEujniQJTn/PXUaqOhWnykyKmly4p66CzbRA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.20",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.21",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1323,7 +1323,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
         "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
-        "microsoft.aspnetcore.authentication.jwtbearer.6.0.20.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.6.0.21.nupkg.sha512",
         "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
@@ -3726,7 +3726,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.20",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.21",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
       "Swashbuckle.AspNetCore >= 6.2.3",
@@ -3772,7 +3772,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
-            "version": "[6.0.20, )"
+            "version": "[6.0.21, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
