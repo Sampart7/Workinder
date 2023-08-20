@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../services/account.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +11,17 @@ import { AccountService } from '../services/account.service';
 export class NavbarComponent {
   model: any = {}
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: response => { console.log(response) },
-      error: error => { console.log(error) }
+      next: () => { this.router.navigateByUrl("/members") },
+      error: errorObject => { this.toastr.error(errorObject.error) }
     })
   }
 
   logout(){
     this.accountService.Logout()
+    this.router.navigateByUrl("/")
   }
 }

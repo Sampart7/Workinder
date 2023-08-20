@@ -1,39 +1,33 @@
-<nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand text-light">Workinder</a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Workinder</a>
 
       <div class="collapse navbar-collapse" *ngIf="accountService.currentUser | async">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="#">Link</a>
-          </li>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/messages" routerLinkActive="active">Massages</a>
+            </li>
         </ul>
 
-        <div class="btn-group" dropdown>
-          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">SETTINGS</button>
-          <ul *dropdownMenu class="dropdown-menu"role="menu">
-            <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-            <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a>
-          </ul>
+        <div class="dropdown" *ngIf="(accountService.currentUser | async) as user" dropdown>
+          <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>{{user.username | titlecase}}</a>
+            <div class="dropdown-menu mt-3" *dropdownMenu>
+              <a class="dropdown-item">Edit Profile</a>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
         </div>
-
       </div>
 
-      <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser| async)">
+      <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser| async)" data-bs-theme="light">
         <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username">
         <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
-        <button class="btn btn-info" type="submit">Login</button>
+        <button class="btn btn-dark" type="submit">Login</button>
       </form>
     </div>
   </nav>

@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container" >
     <div *ngIf="!register" style="text-align: center;">
         <h1>Find your coworker</h1>
+        
         <p class="lead">Lorem ipsum</p>
+
         <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Register</button>
-            <button class="btn btn-info btn-lg me-2">Learn more</button>
+            <button (click)="registerToggle()" class="btn btn-primary me-1">Register</button>
+            <button class="btn btn-dark">Learn more</button>
         </div>
     </div>
 </div>
@@ -14,18 +16,3 @@
         <app-register (cancelRegister)="cancelRegisterToggle($event)"></app-register>
     </div>
 </div>
-
-<table class="table table-secondary">
-    <thead class="table-info">
-        <tr>
-            <th>ID</th>
-            <th>USERNAME</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users">
-            <th>{{user.id}}</th>
-            <th>{{user.userName}}</th>
-        </tr>
-    </tbody>
-</table>
