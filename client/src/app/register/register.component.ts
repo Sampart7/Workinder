@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +16,7 @@ export class RegisterComponent {
   register() {
     this.accountService.register(this.model).subscribe({
       next: () => { this.cancel() },
-      error: errorObject => { 
+      error: errorObject => {
         this.toastr.error(errorObject.error) 
         console.log(errorObject)
       }

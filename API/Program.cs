@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using API.Data;
 using API.Interfaces;
 using API.Services;
@@ -10,9 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<DataContext>(options => 
 {
@@ -31,7 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
         ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateAudience = false    
     };
 });
 
@@ -48,9 +52,24 @@ app.UseCors(builder => builder.WithOrigins("https://localhost:4200").AllowAnyMet
 
 app.UseHttpsRedirection(); 
 
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var ctx = services.GetRequiredService<DataContext>();
+    await ctx.Database.MigrateAsync();
+    await Seed.SeedUser(ctx);
+}
+catch(Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex, "Error");
+}
 
 app.Run();

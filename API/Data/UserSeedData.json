@@ -1,0 +1,112 @@
+[
+    {
+      "UserName": "Sparks",
+      "Gender": "male",
+      "DateOfBirth": "1982-04-16",
+      "KnownAs": "Sparks",
+      "Created": "2021-02-28",
+      "LastActive": "2022-05-16",
+      "Interests": "Duis in tempor consequat id voluptate ex eu qui ea amet velit ea.",
+      "City": "Benson",
+      "Country": "Turkmenistan",
+      "Photos": [
+        {
+          "Url": "https://randomuser.me/api/portraits/men/95.jpg",
+          "IsMain": true
+        }
+      ],
+      "Tags": [
+        {
+            "Name": "Angular"
+        }
+      ]
+    },
+    {
+      "UserName": "Newton",
+      "Gender": "male",
+      "DateOfBirth": "1993-05-05",
+      "KnownAs": "Newton",
+      "Created": "2021-01-11",
+      "LastActive": "2022-06-20",
+      "Interests": "Qui tempor ea occaecat anim do officia enim nisi ullamco occaecat Lorem tempor.",
+      "City": "Glenshaw",
+      "Country": "Bhutan",
+      "Photos": [
+        {
+          "Url": "https://randomuser.me/api/portraits/men/95.jpg",
+          "IsMain": true
+        }
+      ],
+      "Tags": [
+        {
+            "Name": "Angular"
+        }
+      ]
+    },
+    {
+      "UserName": "Lambert",
+      "Gender": "male",
+      "DateOfBirth": "1983-11-22",
+      "KnownAs": "Lambert",
+      "Created": "2021-05-28",
+      "LastActive": "2022-05-26",
+      "Interests": "Minim dolore sint aliquip officia est non sunt.",
+      "City": "Kapowsin",
+      "Country": "United States",
+      "Photos": [
+        {
+          "Url": "https://randomuser.me/api/portraits/men/73.jpg",
+          "IsMain": true
+        }
+      ],
+      "Tags": [
+        {
+            "Name": "Angular"
+        }
+      ]
+    },
+    {
+      "UserName": "Manning",
+      "Gender": "male",
+      "DateOfBirth": "1992-12-09",
+      "KnownAs": "Manning",
+      "Created": "2021-01-09",
+      "LastActive": "2022-05-05",
+      "Interests": "Consectetur officia Lorem irure cupidatat laboris ad.",
+      "City": "Hachita",
+      "Country": "East Timor",
+      "Photos": [
+        {
+          "Url": "https://randomuser.me/api/portraits/men/5.jpg",
+          "IsMain": true
+        }
+      ],
+      "Tags": [
+        {
+            "Name": "Angular"
+        }
+      ]
+    },
+    {
+      "UserName": "Burke",
+      "Gender": "male",
+      "DateOfBirth": "1961-07-01",
+      "KnownAs": "Burke",
+      "Created": "2021-05-21",
+      "LastActive": "2022-05-17",
+      "Interests": "Amet ea commodo et consequat amet exercitation irure qui pariatur officia.",
+      "City": "Irwin",
+      "Country": "St. Helena",
+      "Photos": [
+        {
+          "Url": "https://randomuser.me/api/portraits/men/62.jpg",
+          "IsMain": true
+        }
+      ],
+      "Tags": [
+        {
+            "Name": "Angular"
+        }
+      ]
+    }
+  ]
