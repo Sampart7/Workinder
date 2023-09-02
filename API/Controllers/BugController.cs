@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class BugController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class BugController : ControllerBase
     {
         private readonly DataContext _context;
         public BugController(DataContext context)

@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Member } from 'src/app/models/member';
+import { MembersService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-member-list',
@@ -7,19 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
-  users: any
+  members: Member[] =[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private memberService: MembersService) {}
 
   ngOnInit(): void {
-    this.getUsers()
+    this.loadMembers()
   }
 
-  getUsers(){
-    this.http.get('https://localhost:5001/api/users').subscribe({
-        next: (result:any) => { this.users = result },
-        error: (error:any) => { console.log(error) }
+  loadMembers() {
+    this.memberService.getMembers().subscribe({
+      next: members => {
+        this.members = members
+      }
     })
   }
-
 }

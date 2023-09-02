@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class AccountController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AccountController : ControllerBase
     {
         private readonly DataContext _ctx;
         private readonly ITokenService _tokenService;

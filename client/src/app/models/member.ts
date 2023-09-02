@@ -14,5 +14,5 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
-    tagss: Tag[];
+    tags: Tag[];
   }

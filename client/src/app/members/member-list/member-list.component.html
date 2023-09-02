@@ -4,12 +4,22 @@
             <tr>
                 <th>ID</th>
                 <th>USERNAME</th>
+                <th>Age</th>
+                <th>CITY</th>
+                <th>Country</th>
+                <th>gender</th>
+                <th>knownAs</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
-                <th>{{user.id}}</th>
-                <th>{{user.username}}</th>
+            <tr *ngFor="let member of members">
+                <th>{{member.id}}</th>
+                <th>{{member.username}}</th>
+                <th>{{member.age}}</th>
+                <th>{{member.city}}</th>
+                <th>{{member.country}}</th>
+                <th>{{member.gender}}</th>
+                <th>{{member.knownAs}}</th>
             </tr>
         </tbody>
     </table>

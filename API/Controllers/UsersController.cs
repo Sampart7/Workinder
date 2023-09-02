@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    //[Authorize]
-    public class UsersController : ApiController
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
+    public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
         private readonly IMapper _mapper;
