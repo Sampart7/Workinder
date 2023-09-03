@@ -9,7 +9,7 @@ import { MembersService } from 'src/app/services/member.service';
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
-  members: Member[] =[];
+  members: Member[] = [];
 
   constructor(private memberService: MembersService) {}
 

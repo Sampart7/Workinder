@@ -5,16 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './_modules/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
+import { HomeComponent } from './_modules/home/home.component';
+import { RegisterComponent } from './_modules/register/register.component';
+import { MemberListComponent } from './_modules/members/member-list/member-list.component';
+import { MemberDetailComponent } from './_modules/members/member-detail/member-detail.component';
+import { ListsComponent } from './_modules/lists/lists.component';
+import { MessagesComponent } from './_modules/messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MemberCardComponent } from './_modules/members/member-card/member-card.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,9 @@ import { ToastrModule } from 'ngx-toastr';
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    MemberDetailComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    MemberCardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"

@@ -1,0 +1,36 @@
+<div class="flip-card-container">
+   <div class="flip-card">
+
+     <div class="card-front">
+       <figure>
+         <div class="img-bg"></div>
+         <img src="{{member?.photoUrl}}" alt="{{member?.knownAs}}">
+         <figcaption>{{member?.knownAs}}</figcaption>
+       </figure>
+       <ul>
+         <li>{{member?.city}}</li>
+         <li>{{member?.country}}</li>
+         <li>{{member?.age}}</li>
+       </ul>
+     </div>
+ 
+     <div class="card-back">
+       <figure>
+         <div class="img-bg"></div>
+         <img src="{{member?.photoUrl}}" alt="{{member?.knownAs}}">
+       </figure>
+
+       <div class="button-container">
+        <ng-container *ngFor="let action of ['Show', 'Like', 'Message']">
+          <button class="btn" [routerLink]="'/members/' + member?.username">{{ action }}</button>
+          <div class="design-container">
+            <ng-container *ngFor="let design of [1, 2, 3, 4, 5, 6, 7, 8]">
+              <span class="design" [class]="'design--' + design"></span>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+
+     </div>
+   </div>
+ </div>

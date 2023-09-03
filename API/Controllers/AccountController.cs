@@ -25,6 +25,9 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
+            if(registerDTO.Username.Length == 0) return BadRequest("Empty username");
+            if(registerDTO.Password.Length == 0) return BadRequest("Empty password");
+
             if (await UserExists(registerDTO.Username)) return BadRequest("Username is taken");
 
             using var hmac = new HMACSHA512();
