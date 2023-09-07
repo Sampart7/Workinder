@@ -18,13 +18,13 @@
         <div class="dropdown" *ngIf="(accountService.currentUser | async) as user" dropdown>
           <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>{{user.username | titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
-              <a class="dropdown-item">Edit Profile</a>
+              <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
               <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
         </div>
       </div>
 
-      <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser| async)" data-bs-theme="light">
+      <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser | async)" data-bs-theme="light">
         <input name="username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username">
         <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
         <button class="btn btn-dark" type="submit">Login</button>

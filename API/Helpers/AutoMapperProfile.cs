@@ -1,4 +1,5 @@
 using API.DataTransferObjects;
+using API.DTOs;
 using API.Entities;
 using AutoMapper;
 
@@ -17,6 +18,7 @@ namespace API.Middleware
                         source.GetAge()));
             CreateMap<Photo, PhotoDTO>();
             CreateMap<Tag, TagDTO>();
+            CreateMap<MemberUpdateDTO, AppUser>();
         }
     }
 }

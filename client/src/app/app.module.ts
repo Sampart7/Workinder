@@ -17,6 +17,7 @@ import { MessagesComponent } from './_modules/messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MemberCardComponent } from './_modules/members/member-card/member-card.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { MemberEditComponent } from './_modules/members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     MemberListComponent,
     ListsComponent,
     MessagesComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,

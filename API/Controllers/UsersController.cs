@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using API.DataTransferObjects;
+using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -31,6 +33,19 @@ namespace API.Controllers
         public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
             return await _userRepo.GetMemberAsync(username);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByUsernameAsync(username);
+
+            _mapper.Map(memberUpdateDTO, user);
+            _userRepo.Update(user);
+
+            if (await _userRepo.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to update user");
         }
     }
 }
