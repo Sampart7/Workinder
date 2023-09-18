@@ -63,18 +63,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-try
-{
-    var ctx = services.GetRequiredService<DataContext>();
-    await ctx.Database.MigrateAsync();
-    await Seed.SeedUser(ctx);
-}
-catch(Exception ex)
-{
-    var logger = services.GetService<ILogger<Program>>();
-    logger.LogError(ex, "Error");
-}
-
 app.Run();

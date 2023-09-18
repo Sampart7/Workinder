@@ -45,7 +45,7 @@ namespace API.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Interest")
+                    b.Property<string>("Interests")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KnownAs")

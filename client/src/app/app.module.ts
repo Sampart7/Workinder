@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { MemberCardComponent } from './_modules/members/member-card/member-card.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MemberEditComponent } from './_modules/members/member-edit/member-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,8 +44,13 @@ import { MemberEditComponent } from './_modules/members/member-edit/member-edit.
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
+    NgxSpinnerModule.forRoot({
+      type: "timer"
+    }),
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

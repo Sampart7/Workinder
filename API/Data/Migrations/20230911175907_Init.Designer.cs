@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230827164804_Init")]
+    [Migration("20230911175907_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace API.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Interest")
+                    b.Property<string>("Interests")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KnownAs")
