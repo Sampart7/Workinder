@@ -1,9 +1,8 @@
-using API.DataTransferObjects;
 using API.DTOs;
 using API.Entities;
 using AutoMapper;
 
-namespace API.Middleware
+namespace API.Helpers
 {
     public class AutoMapperProfile : Profile
     {

@@ -1,4 +1,4 @@
-using API.DataTransferObjects;
+using API.DTOs;
 
 namespace API.DTOs
 {

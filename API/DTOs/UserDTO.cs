@@ -1,4 +1,4 @@
-namespace API.DataTransferObjects
+namespace API.DTOs
 {
     public class UserDTO
     {

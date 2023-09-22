@@ -1,5 +1,4 @@
-
-using API.DataTransferObjects;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;

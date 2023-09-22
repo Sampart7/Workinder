@@ -39,8 +39,6 @@ export class MemberDetailComponent implements OnInit {
     if(!this.member) return;
     for (const photo of this.member.photos) {
       this.images.push(new ImageItem({src: photo.url, thumb: photo.url}))
-      this.images.push(new ImageItem({src: photo.url, thumb: photo.url}))
-      this.images.push(new ImageItem({src: photo.url, thumb: photo.url}))
     }
   }
 }

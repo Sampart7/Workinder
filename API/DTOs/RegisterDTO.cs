@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace API.DataTransferObjects
+namespace API.DTOs
 {
     public class RegisterDTO
     {

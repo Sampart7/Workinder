@@ -11,7 +11,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './_modules/home/home.component';
 import { RegisterComponent } from './_modules/register/register.component';
 import { MemberListComponent } from './_modules/members/member-list/member-list.component';
-import { MemberDetailComponent } from './_modules/members/member-detail/member-detail.component';
 import { ListsComponent } from './_modules/lists/lists.component';
 import { MessagesComponent } from './_modules/messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -20,6 +19,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MemberEditComponent } from './_modules/members/member-edit/member-edit.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { PhotoEditorComponent } from './_modules/members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     ListsComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     NgxSpinnerModule.forRoot({
       type: "timer"
     }),
+    FileUploadModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
