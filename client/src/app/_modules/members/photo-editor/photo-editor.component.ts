@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { Member } from 'src/app/models/member';
+import { Photo } from 'src/app/models/photo';
 import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { MembersService } from 'src/app/services/member.service';
@@ -35,24 +36,33 @@ export class PhotoEditorComponent implements OnInit{
     this.hasBaseDropzoneOver = e;
   }
 
-  // setMainPhoto(photo: Photo) {
-  //   this.memberService.setMainPhoto(photo.id).subscribe(() => {
-  //     this.user.photoUrl = photo.url;
-  //     this.accountService.setCurrentUser(this.user);
-  //     this.member.photoUrl = photo.url;
-  //     this.member.photos.forEach(p => {
-  //       if (p.isMain) p.isMain = false;
-  //       if (p.id === photo.id) p.isMain = true;
-  //     })
-  //   })
-  // } 
+  setMainPhoto(photo: Photo) {
+    this.memberService.setMainPhoto(photo.id).subscribe({
+      next: () => {
+        if(this.user && this.member) {
+          this.user.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+          this.member.photoUrl = photo.url;
+          
+          this.member.photos.forEach(p => {
+            if (p.isMain) p.isMain = false;
+            if (p.id === photo.id) p.isMain = true;
+          })
+        }
+      }
+    })
+  } 
 
-  // deletePhoto(photoId: number) {
-  //   this.memberService.deletePhoto(photoId).subscribe(() => {
-  //     this.member.photos = this.member.photos.filter(x => x.id !== photoId);
-  //   })
-  // }
-
+  deletePhoto(photoId: number) {
+    this.memberService.deletePhoto(photoId).subscribe({
+      next: () => {
+        if(this.member) {
+          this.member.photos = this.member.photos.filter(x => x.id !== photoId);
+        }
+      }
+    })
+  }
+  
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/add-photo',
