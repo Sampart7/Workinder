@@ -1,5 +1,3 @@
-using API.DTOs;
-
 namespace API.DTOs
 {
     public class MemberUpdateDTO
@@ -10,7 +8,5 @@ namespace API.DTOs
         public string KnownAs { get; set; }
         public string Gender { get; set; }
         public string DateofBirth { get; set; }
-
-        //public ICollection<TagDTO> Tags { get; set; }
     }
 }

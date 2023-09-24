@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from '../models/member';
 import { environment } from 'src/environments/environment';
+import { Tag } from '../models/tag';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,14 @@ export class MembersService {
 
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + "users/delete-photo/" + photoId, this.getHttpOptions());
+  }
+
+  addTag(tagName: string): Observable<any> {
+    return this.http.post(this.baseUrl + "users/add-tag", { name: tagName }, this.getHttpOptions());
+  }
+
+  deleteTag(tagId: number): Observable<any> {
+    return this.http.delete(this.baseUrl + "users/delete-tag/" + tagId, this.getHttpOptions());
   }
 
   getHttpOptions() {

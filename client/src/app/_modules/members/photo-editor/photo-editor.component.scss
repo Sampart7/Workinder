@@ -1,0 +1,28 @@
+.custom-border-right {
+    border-right: 1px solid black;
+}
+
+.equal-btn-size {
+    width: 120px;
+    height: 30px;
+}
+
+.btn-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.table {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+  }

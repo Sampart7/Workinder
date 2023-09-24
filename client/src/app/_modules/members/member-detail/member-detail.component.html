@@ -24,7 +24,7 @@
             <div class="card-footer">
                 <div class="btn-group d-flex">
                     <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-success">Message</button>
+                    <button class="btn btn-dark">Message</button>
                 </div>
             </div>
         </div>
@@ -43,7 +43,10 @@
                 <p>Messages will go here</p>
             </tab>
             <tab heading='Tags'>
-                <p *ngFor="let tag of member.tags">{{ tag.name }}</p>
+                <label for="tags">Tags: </label>
+                <ul>
+                    <li *ngFor="let tag of member.tags">{{ tag.name }}</li>
+                </ul>
             </tab>
         </tabset>
     </div>

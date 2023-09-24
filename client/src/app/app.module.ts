@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './_modules/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './_modules/home/home.component';
 import { RegisterComponent } from './_modules/register/register.component';
@@ -41,6 +41,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({

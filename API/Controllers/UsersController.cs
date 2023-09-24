@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
@@ -125,6 +125,45 @@ namespace API.Controllers
 
             if (await _userRepo.SaveAllAsync()) return Ok();
 
+            return BadRequest("Failed to delete the photo");
+        }
+
+        [HttpPost("add-tag")]
+        public async Task<ActionResult> AddTags([FromBody] TagDTO tagDTO)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByUsernameAsync(username);
+
+            if (user == null) return NotFound();
+
+            var tag = new Tag
+            {
+                Name = tagDTO.Name,
+                AppUser = user
+            };
+            
+            user.Tags.Add(tag);
+
+            if (await _userRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed to add the tag");
+        }
+
+        [HttpDelete("delete-tag/{tagId}")]
+        public async Task<ActionResult> DeleteTag(int tagId)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByUsernameAsync(username);
+            if (user == null) return NotFound();
+
+            var tag = user.Tags.FirstOrDefault(t => t.Id == tagId);
+
+            if (tag == null) return NotFound();
+
+            user.Tags.Remove(tag);
+
+            if (await _userRepo.SaveAllAsync()) return Ok();
+            
             return BadRequest("Failed to delete the photo");
         }
     }

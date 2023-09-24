@@ -22,15 +22,44 @@ export class MemberEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  newTagName: string = '';
 
-  constructor(private accountService: AccountService, private memberService: MembersService, private toastr: ToastrService, private router: Router) { 
+  constructor(private accountService: AccountService, 
+    private memberService: MembersService, 
+    private toastr: ToastrService, 
+    private router: Router) { 
       this.accountService.currentUser.pipe(take(1)).subscribe({
         next: user => this.user = user
       });
   }
-
+  
   ngOnInit(): void {
     this.loadMember();
+  }
+
+  addTag() {
+    if (this.newTagName.trim() === '') return;
+
+    this.memberService.addTag(this.newTagName).subscribe(
+      (response) => {
+        this.member.tags.push(response);
+        this.newTagName = '';
+      },
+      (error) => {
+        console.error('Błąd podczas dodawania taga:', error);
+      }
+    );
+  }
+
+  deleteTag(tagId: number) {
+    this.memberService.deleteTag(tagId).subscribe(
+      () => {
+        this.member.tags = this.member.tags.filter(tag => tag.id !== tagId);
+      },
+      (error) => {
+        console.error('Błąd podczas usuwania taga:', error);
+      }
+    );
   }
 
   loadMember() {

@@ -29,9 +29,10 @@
                     <p>{{member.created}}</p>
                 </div>
             </div>
-            <div class="card-footer">
-                <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success btn-block">Save Changes</button>
+            <div class="card-footer" style="display: flex; justify-content: center;">
+                <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-primary">Save Changes</button>
             </div>
+            
         </div>
     </div>
 
@@ -51,10 +52,6 @@
                         <input [(ngModel)]="member.city" type="text" name="City" class="form-control mx-2">
                         <label for="country">Country: </label>
                         <input [(ngModel)]="member.country" type="text" name="Country" class="form-control mx-2">
-                        <!-- <div class="form-group">
-                            <label for="DateofBirth">Date of Birth: </label>
-                            <input [(ngModel)]="member.dateOfBirth" type="date" name="DateofBirth" class="form-control mx-2">
-                        </div> -->
                     </div>
                 </form>
                
@@ -63,8 +60,19 @@
                 <app-photo-editor [member]="member"></app-photo-editor>
             </tab>
             <tab heading="Tags">
-                <p>Tags edit will go here</p>
-            </tab>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="newTagName" [(ngModel)]="newTagName">
+                  <button class="btn btn-primary" (click)="addTag()">Add Tag</button>
+                </div>
+              
+                <label for="tags">Tags: </label>
+                <ul>
+                  <li *ngFor="let tag of member.tags">
+                    {{ tag.name }}
+                    <button class="btn btn-danger btn-sm" (click)="deleteTag(tag.id)">Delete</button>
+                  </li>
+                </ul>
+              </tab>      
         </tabset>
     </div>
 </div>

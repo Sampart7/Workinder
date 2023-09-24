@@ -41,6 +41,7 @@ namespace API.Data
         {
             return await _ctx.Users
                 .Include(p => p.Photos)
+                .Include(t => t.Tags)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
@@ -48,6 +49,7 @@ namespace API.Data
         {
             return await _ctx.Users
                 .Include(p => p.Photos)
+                .Include(t => t.Tags)
                 .ToListAsync();
         }
 
