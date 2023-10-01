@@ -10,7 +10,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
@@ -31,17 +31,17 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{username}", Name = "GetUser")]
-        public async Task<ActionResult<MemberDTO>> GetUser(string username)
+        [HttpGet("{email}", Name = "GetUser")]
+        public async Task<ActionResult<MemberDTO>> GetUser(string email)
         {
-            return await _userRepo.GetMemberAsync(username);
+            return await _userRepo.GetMemberAsync(email);
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
 
@@ -55,8 +55,8 @@ namespace API.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
 
@@ -76,7 +76,7 @@ namespace API.Controllers
 
             if (await _userRepo.SaveAllAsync())
             {
-                return CreatedAtAction(nameof(GetUser), new {username = user.UserName}, _mapper.Map<PhotoDTO>(photo));
+                return CreatedAtAction(nameof(GetUser), new {email = user.Email}, _mapper.Map<PhotoDTO>(photo));
             }
 
             return BadRequest("Problem addding photo");
@@ -85,8 +85,8 @@ namespace API.Controllers
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -106,8 +106,8 @@ namespace API.Controllers
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 
             var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -131,8 +131,8 @@ namespace API.Controllers
         [HttpPost("add-tag")]
         public async Task<ActionResult> AddTags([FromBody] TagDTO tagDTO)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
 
@@ -152,8 +152,8 @@ namespace API.Controllers
         [HttpDelete("delete-tag/{tagId}")]
         public async Task<ActionResult> DeleteTag(int tagId)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var user = await _userRepo.GetUserByUsernameAsync(username);
+            var email = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 
             var tag = user.Tags.FirstOrDefault(t => t.Id == tagId);

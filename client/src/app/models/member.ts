@@ -3,7 +3,7 @@ import { Tag } from './tag';
 
 export interface Member {
     id: number;
-    username: string;
+    email: string;
     photoUrl: string;
     age: number;
     dateOfBirth: Date;

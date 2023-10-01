@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from '../models/member';
 import { environment } from 'src/environments/environment';
-import { Tag } from '../models/tag';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,42 +13,30 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   getMembers() {
-    return this.http.get<Member[]>(this.baseUrl + "users", this.getHttpOptions());
+    return this.http.get<Member[]>(this.baseUrl + "users");
   }
 
-  getMember(username: string) {
-    return this.http.get<Member>(this.baseUrl + "users/" + username, this.getHttpOptions());
+  getMember(email: string) {
+    return this.http.get<Member>(this.baseUrl + "users/" + email);
   }
 
   updateMember(member: Member) {
-    return this.http.put(this.baseUrl + "users", member, this.getHttpOptions())
+    return this.http.put(this.baseUrl + "users", member)
   }
 
   setMainPhoto(photoId: number) {
-    return this.http.put(this.baseUrl + "users/set-main-photo/" + photoId, {}, this.getHttpOptions());
+    return this.http.put(this.baseUrl + "users/set-main-photo/" + photoId, {});
   }
 
   deletePhoto(photoId: number) {
-    return this.http.delete(this.baseUrl + "users/delete-photo/" + photoId, this.getHttpOptions());
+    return this.http.delete(this.baseUrl + "users/delete-photo/" + photoId);
   }
 
   addTag(tagName: string): Observable<any> {
-    return this.http.post(this.baseUrl + "users/add-tag", { name: tagName }, this.getHttpOptions());
+    return this.http.post(this.baseUrl + "users/add-tag", { name: tagName });
   }
 
   deleteTag(tagId: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "users/delete-tag/" + tagId, this.getHttpOptions());
-  }
-
-  getHttpOptions() {
-    const userString = localStorage.getItem("user");
-    if(!userString) return;
-
-    const user = JSON.parse(userString);
-    return {
-      headers: new HttpHeaders({
-        Authorization: "Bearer " + user.token
-      })
-    }
+    return this.http.delete(this.baseUrl + "users/delete-tag/" + tagId);
   }
 }

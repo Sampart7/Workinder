@@ -2,20 +2,22 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  model: any = {}
   registerForm: FormGroup = new FormGroup({});
+  maxDate: Date = new Date();
 
   constructor(private accountService: AccountService, 
     private toastr: ToastrService, 
-    private formBuidler: FormBuilder) { }
+    private formBuidler: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuidler.group({
@@ -24,7 +26,7 @@ export class RegisterComponent implements OnInit{
       dateOfBirth: ["", Validators.required],
       city: ["", Validators.required],
       country: ["", Validators.required],
-      username:["", [
+      email:["", [
         Validators.required, 
         Validators.pattern("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + 
         "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$")
@@ -43,6 +45,8 @@ export class RegisterComponent implements OnInit{
     this.registerForm.controls["password"].valueChanges.subscribe({
       next: () => this.registerForm.controls["confirmPassword"].updateValueAndValidity()
     })
+
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   matchValues(matchTo: string): ValidatorFn {
@@ -53,24 +57,38 @@ export class RegisterComponent implements OnInit{
   }
 
   register() {
-    console.log(this.registerForm?.value);
-    // this.accountService.register(this.model).subscribe({
-    //   next: () => { this.cancel() },
-    //   error: errorObject => {
-    //     if (errorObject.error.errors) {
-    //       if (errorObject.error.errors.Username) {
-    //         this.toastr.error(errorObject.error.errors.Username)
-    //       } else if (errorObject.error.errors.Password) {
-    //         this.toastr.error(errorObject.error.errors.Password)
-    //       }
-    //     } else {
-    //       this.toastr.error(errorObject.error) 
-    //     }
-    //   }
-    // })
+    const dob = this.getDateOnly(this.registerForm.controls["dateOfBirth"].value);
+    const values = {...this.registerForm.value, dateOfBirth: dob};
+
+    this.accountService.register(values).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/members');
+      },
+      error: error => {
+        this.toastr.error(error) 
+      }
+    })
   }
+
+      // error: errorObject => {
+      //   if (errorObject.error.errors) {
+      //     if (errorObject.error.errors.Email) {
+      //       this.toastr.error(errorObject.error.errors.Email)
+      //     } else if (errorObject.error.errors.Password) {
+      //       this.toastr.error(errorObject.error.errors.Password)
+      //     }
+      //   } else {
+      //     this.toastr.error(errorObject.error) 
+      //   }
+      // }
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  private getDateOnly(dob: string | undefined) {
+    let theDob = new Date(dob)
+    return new Date(theDob.setMinutes(theDob.getMinutes()-theDob.getTimezoneOffset()))
+      .toISOString().slice(0,10);
   }
 }

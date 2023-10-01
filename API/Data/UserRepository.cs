@@ -17,10 +17,10 @@ namespace API.Data
             _ctx = ctx;
         }
 
-        public async Task<MemberDTO> GetMemberAsync(string username)
+        public async Task<MemberDTO> GetMemberAsync(string email)
         {
             return await _ctx.Users
-                .Where(x => x.UserName == username)
+                .Where(x => x.Email == email)
                 .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
@@ -37,12 +37,12 @@ namespace API.Data
             return await _ctx.Users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<AppUser> GetUserByEmailAsync(string email)
         {
             return await _ctx.Users
                 .Include(p => p.Photos)
                 .Include(t => t.Tags)
-                .SingleOrDefaultAsync(x => x.UserName == username);
+                .SingleOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()

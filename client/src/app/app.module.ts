@@ -21,6 +21,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './_modules/members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { DateInputComponent } from './_modules/forms/date-input/date-input.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TextInputComponent } from './_modules/forms/text-input/text-input.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberCardComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    DateInputComponent,
+    TextInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,9 +57,11 @@ import { FileUploadModule } from 'ng2-file-upload';
       type: "timer"
     }),
     FileUploadModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

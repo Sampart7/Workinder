@@ -22,7 +22,7 @@
 
        <div class="button-container">
         <ng-container *ngFor="let action of ['Show', 'Like', 'Message']">
-          <button class="btn" [routerLink]="'/members/' + member?.username">{{ action }}</button>
+          <button class="btn" [routerLink]="'/members/' + member?.email">{{ action }}</button>
           <div class="design-container">
             <ng-container *ngFor="let design of [1, 2, 3, 4, 5, 6, 7, 8]">
               <span class="design" [class]="'design--' + design"></span>

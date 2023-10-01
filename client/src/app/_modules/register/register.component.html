@@ -1,5 +1,11 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center text-secondary">Sing up</h2>
+
+    <app-text-input [formControl]='registerForm.controls["email"]' [label]='"Email"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["knownAs"]' [label]='"Known As"'></app-text-input>
+    <app-date-input [formControl]='registerForm.controls["dateOfBirth"]' 
+        [maxDate]="maxDate" [label]='"Date Of Birth"'></app-date-input>
+
     <div class="mb-3">
         <label class="control-label" style="margin-right:10px">Gender</label>
         <label class="radio-inline" style="margin-right:10px">
@@ -9,44 +15,19 @@
             <input type="radio" value='female' formControlName='gender' class="ml-3"> Female
         </label>
         <label class="radio-inline" style="margin-right:10px">
-            <input type="radio" value='female' formControlName='gender' class="ml-3"> Another
+            <input type="radio" value='another' formControlName='gender' class="ml-3"> Another
         </label>
     </div>
-    <div class="mb3">
-        <input type="text" class="form-control" formControlName="username" placeholder="Username"
-        [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched">
-        <div class="invalid-feedback" *ngIf="registerForm.get('username')?.hasError('required')"> 
-            Please enter a email</div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('username')?.hasError('pattern')">
-            This must be a email
-        </div>
-    </div>
-    <div class="mb3 mt-1">
-        <input type="password" class="form-control" formControlName="password" placeholder="Password"
-        [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
-        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">
-            Please enter a password
-        </div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength')">
-            Pasword must be at least 6 characters
-        </div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('maxlength')">
-            Pasword must be at most 24 characters
-        </div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('pattern')">
-            Password must contain at least one uppercase letter and one special character
-        </div>
-    </div>
-    <div class="mb3 mt-1">
-        <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password"
-        [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched">
-        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
-            Please enter a confirmation password
-        </div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('notMatching')">
-            Confirm password must match password
-        </div>
-    </div>
+    
+    <app-text-input [formControl]='registerForm.controls["city"]' [label]='"City"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-text-input>
+
+    <app-text-input [formControl]='registerForm.controls["password"]' 
+        [label]='"Password"' [type]='"password"'></app-text-input>
+    <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
+        [label]='"Confirm Password"' [type]='"password"'></app-text-input>
+
+
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Register</button>
         <button (click)="cancel()" class="btn btn-dark" type="button">Cancel</button>

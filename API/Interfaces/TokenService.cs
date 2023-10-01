@@ -18,7 +18,7 @@ namespace API.Interfaces
         {
             var claims = new List<Claim> 
             {
-                new Claim(JwtRegisteredClaimNames.NameId, appUser.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId, appUser.Email)
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

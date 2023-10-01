@@ -24,10 +24,10 @@ export class MemberDetailComponent implements OnInit {
   }
 
   loadMember() {
-    const username = this.route.snapshot.paramMap.get("username");
-    if (!username) return;
+    const email = this.route.snapshot.paramMap.get("email");
+    if (!email) return;
 
-    this.memberService.getMember(username).subscribe({
+    this.memberService.getMember(email).subscribe({
       next: member => {
         this.member = member
         this.getImages()

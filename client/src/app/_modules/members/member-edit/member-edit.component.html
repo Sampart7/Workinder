@@ -46,15 +46,33 @@
                     <div class="form-inline">
                         <label for="knownAs">Known As: </label>
                         <input [(ngModel)]="member.knownAs" type="text" name="KnownAs" class="form-control mx-2">
-                        <label for="gender">Gender: </label>
-                        <input [(ngModel)]="member.gender" type="text" name="Gender" class="form-control mx-2">
+                    </div>
+                    
+                    <label for="gender">Gender:</label>
+                    <div class="form-inline d-flex justify-content-between" id="gender">
+                        <label>
+                            <input [(ngModel)]="member.gender" type="radio" value="male" name="Gender"> Male
+                        </label>
+                        <label>
+                            <input [(ngModel)]="member.gender" type="radio" value="female" name="Gender"> Female
+                        </label>
+                        <label>
+                            <input [(ngModel)]="member.gender" type="radio" value="another" name="Gender"> Another
+                        </label>
+                    </div>
+                    
+                    <div class="form-inline">
                         <label for="city">City: </label>
                         <input [(ngModel)]="member.city" type="text" name="City" class="form-control mx-2">
+                    </div>
+                    
+                    <div class="form-inline">
                         <label for="country">Country: </label>
                         <input [(ngModel)]="member.country" type="text" name="Country" class="form-control mx-2">
                     </div>
+                    
                 </form>
-               
+
             </tab>
             <tab heading="Edit Photos">
                 <app-photo-editor [member]="member"></app-photo-editor>
