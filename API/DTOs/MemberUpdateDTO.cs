@@ -7,6 +7,5 @@ namespace API.DTOs
         public string Country { get; set; }
         public string KnownAs { get; set; }
         public string Gender { get; set; }
-        public string DateofBirth { get; set; }
     }
 }

@@ -10,6 +10,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class DateInputComponent implements ControlValueAccessor {
   @Input() label = "";
   @Input() maxDate: Date | undefined;
+  @Input() minDate: Date | undefined;
   bsConfig: Partial<BsDatepickerConfig> | undefined;
 
   constructor(@Self() public ngControl: NgControl) {
@@ -17,10 +18,11 @@ export class DateInputComponent implements ControlValueAccessor {
     this.bsConfig = {
       containerClass: "theme-default",
       dateInputFormat: "DD MM YYYY",
+      showWeekNumbers: false,
     }
   }
 
-  writeValue(obj: any): void {
+  writeValue(value: any): void {
   }
 
   registerOnChange(fn: any): void {

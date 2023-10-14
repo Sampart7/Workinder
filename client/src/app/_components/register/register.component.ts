@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
+  minDate: Date = new Date();
 
   constructor(private accountService: AccountService, 
     private toastr: ToastrService, 
@@ -23,7 +24,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuidler.group({
       gender: ["male"],
       knownAs: ["", Validators.required],
-      dateOfBirth: ["", Validators.required],
+      dateOfBirth: ["", [
+        Validators.required, 
+        this.dateOfBirthRangeValidator()
+      ]],
       city: ["", Validators.required],
       country: ["", Validators.required],
       email:["", [
@@ -47,6 +51,7 @@ export class RegisterComponent implements OnInit {
     })
 
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.minDate.setFullYear(this.minDate.getFullYear() - 100);
   }
 
   matchValues(matchTo: string): ValidatorFn {
@@ -69,21 +74,17 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-
-      // error: errorObject => {
-      //   if (errorObject.error.errors) {
-      //     if (errorObject.error.errors.Email) {
-      //       this.toastr.error(errorObject.error.errors.Email)
-      //     } else if (errorObject.error.errors.Password) {
-      //       this.toastr.error(errorObject.error.errors.Password)
-      //     }
-      //   } else {
-      //     this.toastr.error(errorObject.error) 
-      //   }
-      // }
-
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  dateOfBirthRangeValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const dob = new Date(control.value);
+      
+      if (dob >= this.minDate && dob <= this.maxDate) return null
+      else { dateOutOfRange: true };
+    };
   }
 
   private getDateOnly(dob: string | undefined) {

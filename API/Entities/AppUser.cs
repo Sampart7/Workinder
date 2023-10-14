@@ -16,14 +16,5 @@ namespace API.Entities
         public string Country { get; set; }
         public List<Photo> Photos { get; set; } = new List<Photo>();
         public List<Tag> Tags { get; set; } = new List<Tag>();
-        public int GetAge()
-        {
-            var today = DateOnly.FromDateTime(DateTime.UtcNow);
-            var age = today.Year - DateofBirth.Year;
-
-            if (today.Month < DateofBirth.Month || (today.Month == DateofBirth.Month && today.Day < DateofBirth.Day)) age--;
-
-            return age;
-        }
     }
 }

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './_modules/home/home.component';
-import { MemberDetailComponent } from './_modules/members/member-detail/member-detail.component';
-import { ListsComponent } from './_modules/lists/lists.component';
-import { MessagesComponent } from './_modules/messages/messages.component';
-import { MemberListComponent } from './_modules/members/member-list/member-list.component';
 import { authGuard } from './guards/auth.guard';
-import { MemberEditComponent } from './_modules/members/member-edit/member-edit.component';
 import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
+import { HomeComponent } from './_components/home/home.component';
+import { MemberListComponent } from './_components/members/member-list/member-list.component';
+import { MemberDetailComponent } from './_components/members/member-detail/member-detail.component';
+import { MemberEditComponent } from './_components/members/member-edit/member-edit.component';
+import { ListsComponent } from './_components/lists/lists.component';
+import { MessagesComponent } from './_components/messages/messages.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
