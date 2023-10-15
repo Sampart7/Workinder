@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/models/member';
+import { Tag } from 'src/app/models/tag';
 import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { MembersService } from 'src/app/services/member.service';
@@ -23,6 +24,7 @@ export class MemberEditComponent implements OnInit {
     }
   }
   newTagName: string = '';
+  availableTags: string[] = [".NET", "C", "C++", "Java"];
 
   constructor(private accountService: AccountService, 
     private memberService: MembersService, 
@@ -38,28 +40,23 @@ export class MemberEditComponent implements OnInit {
   }
 
   addTag() {
-    if (this.newTagName.trim() === '') return;
-
+    if (!this.newTagName || this.member.tags.some(tag => tag.name === this.newTagName)) {
+      this.toastr.error('Unselected or duplicate tag');
+      return;
+    }
+  
     this.memberService.addTag(this.newTagName).subscribe(
       (response) => {
         this.member.tags.push(response);
         this.newTagName = '';
-      },
-      (error) => {
-        console.error('Błąd podczas dodawania taga:', error);
-      }
-    );
+      });
   }
 
   deleteTag(tagId: number) {
     this.memberService.deleteTag(tagId).subscribe(
       () => {
-        this.member.tags = this.member.tags.filter(tag => tag.id !== tagId);
-      },
-      (error) => {
-        console.error('Błąd podczas usuwania taga:', error);
-      }
-    );
+        this.member.tags = this.member.tags.filter(tag => tag.id !== tagId)
+      });
   }
 
   loadMember() {

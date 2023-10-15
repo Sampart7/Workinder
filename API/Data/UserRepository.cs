@@ -39,6 +39,11 @@ namespace API.Data
 
             if (userParams.Gender != "all") query = query.Where(u => u.Gender == userParams.Gender);
 
+            if (!string.IsNullOrEmpty(userParams.SelectedTag))
+            {
+                query = query.Where(u => u.Tags.Any(tag => tag.Name == userParams.SelectedTag));
+            }
+
             return await PagedList<MemberDTO>.CreateAsync(
                 query.AsNoTracking().ProjectTo<MemberDTO>(_mapper.ConfigurationProvider), 
                 userParams.PageNumber, userParams.PageSize);

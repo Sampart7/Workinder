@@ -4,4 +4,5 @@ export class UserParams {
   maxAge = 99;
   pageNumber = 1;
   pageSize = 4;
+  selectedTag: string = "";
 }

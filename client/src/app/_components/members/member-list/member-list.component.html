@@ -31,12 +31,11 @@
 
     <div class="d-flex px-2">
       <label class="col-form-label me-2">Show by Tags: </label>
-      <select name="tag" style="width: 150px" class="form-select ms-1" [(ngModel)]="userParams.tag">
+      <select name="tag" style="width: 150px" class="form-select ms-1" [(ngModel)]="userParams.selectedTag">
         <option *ngFor="let tag of tagList" [value]="tag">{{tag}}</option>
       </select>
     </div>
     
-
     <button class="btn btn-primary ms-1" type="submit">Apply Filters</button>
     <button (click)="resetFilters()" class="btn btn-info ms-1" type="submit">Reset Filters</button>
 

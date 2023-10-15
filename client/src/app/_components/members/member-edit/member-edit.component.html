@@ -79,8 +79,12 @@
             </tab>
             <tab heading="Tags">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="newTagName" [(ngModel)]="newTagName">
+                    <label for="selectedTag">Select Tag:</label>
+                    <select class="form-control" id="selectedTag" [(ngModel)]="newTagName" name="selectedTag">
+                      <option *ngFor="let tag of availableTags" [value]="tag">{{ tag }}</option>
+                    </select>
                   <button class="btn btn-primary" (click)="addTag()">Add Tag</button>
+                  
                 </div>
               
                 <label for="tags">Tags: </label>
