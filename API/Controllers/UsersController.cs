@@ -11,7 +11,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
@@ -27,6 +27,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
+            var currentUser = await _userRepo.GetUserByEmailAsync(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            userParams.CurrentEmail = currentUser.Email;
+
             var users = await _userRepo.GetMembersAsync(userParams);
 
             Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, 
@@ -170,5 +173,6 @@ namespace API.Controllers
             
             return BadRequest("Failed to delete the photo");
         }
+        
     }
 }

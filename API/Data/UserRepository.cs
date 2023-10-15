@@ -28,11 +28,20 @@ namespace API.Data
 
         public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams userParams)
         {
-            var query = _ctx
-            .Users.ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
-            .AsNoTracking();
+            var query = _ctx.Users.Include(user => user.Tags).AsQueryable();
 
-            return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            query = query.Where(user => user.Email != userParams.CurrentEmail);
+
+            var minBD = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            var maxDB = DateTime.Today.AddYears(-userParams.MinAge);
+
+            query = query.Where(user => user.DateofBirth >= minBD && user.DateofBirth <= maxDB);
+
+            if (userParams.Gender != "all") query = query.Where(u => u.Gender == userParams.Gender);
+
+            return await PagedList<MemberDTO>.CreateAsync(
+                query.AsNoTracking().ProjectTo<MemberDTO>(_mapper.ConfigurationProvider), 
+                userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -65,5 +74,6 @@ namespace API.Data
         {
             _ctx.Entry(user).State = EntityState.Modified;
         }
+
     }
 }

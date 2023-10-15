@@ -27,12 +27,14 @@
     <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
         [label]='"Confirm Password"' [type]='"password"'></app-text-input>
 
+    <div class="row" *ngIf="validationErrors">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">{{error}}</li>
+        </ul>
+    </div>
 
     <div class="text-center">
         <button [disabled]="!registerForm.valid" class="btn btn-primary" type="submit">Register</button>
         <button (click)="cancel()" class="btn btn-dark" type="button">Cancel</button>
     </div>
 </form>
-
-<p>Form value: {{registerForm.value | json}}</p>
-<p>Form value: {{registerForm.status | json}}</p>

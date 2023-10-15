@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
   minDate: Date = new Date();
+  validationErrors: string[] | undefined
 
   constructor(private accountService: AccountService, 
     private toastr: ToastrService, 
@@ -21,13 +22,16 @@ export class RegisterComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.initializeForm();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.minDate.setFullYear(this.minDate.getFullYear() - 100);
+  }
+
+  initializeForm() {
     this.registerForm = this.formBuidler.group({
       gender: ["male"],
       knownAs: ["", Validators.required],
-      dateOfBirth: ["", [
-        Validators.required, 
-        this.dateOfBirthRangeValidator()
-      ]],
+      dateOfBirth: ["", Validators.required],
       city: ["", Validators.required],
       country: ["", Validators.required],
       email:["", [
@@ -49,9 +53,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.controls["password"].valueChanges.subscribe({
       next: () => this.registerForm.controls["confirmPassword"].updateValueAndValidity()
     })
-
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-    this.minDate.setFullYear(this.minDate.getFullYear() - 100);
   }
 
   matchValues(matchTo: string): ValidatorFn {
@@ -62,34 +63,16 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const dob = this.getDateOnly(this.registerForm.controls["dateOfBirth"].value);
-    const values = {...this.registerForm.value, dateOfBirth: dob};
-
-    this.accountService.register(values).subscribe({
-      next: () => {
-        this.router.navigateByUrl('/members');
-      },
+    this.accountService.register(this.registerForm.value).subscribe({
+      next: () => this.router.navigateByUrl('/members'),
       error: error => {
-        this.toastr.error(error) 
+        this.toastr.error(error);
+        this.validationErrors = error;
       }
     })
   }
+  
   cancel() {
     this.cancelRegister.emit(false);
-  }
-
-  dateOfBirthRangeValidator(): ValidatorFn {
-    return (control: AbstractControl) => {
-      const dob = new Date(control.value);
-      
-      if (dob >= this.minDate && dob <= this.maxDate) return null
-      else { dateOutOfRange: true };
-    };
-  }
-
-  private getDateOnly(dob: string | undefined) {
-    let theDob = new Date(dob)
-    return new Date(theDob.setMinutes(theDob.getMinutes()-theDob.getTimezoneOffset()))
-      .toISOString().slice(0,10);
   }
 }
