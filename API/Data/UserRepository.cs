@@ -44,6 +44,12 @@ namespace API.Data
                 query = query.Where(u => u.Tags.Any(tag => tag.Name == userParams.SelectedTag));
             }
 
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(user => user.Created),
+                _ => query.OrderByDescending(user => user.LastActive)
+            };
+
             return await PagedList<MemberDTO>.CreateAsync(
                 query.AsNoTracking().ProjectTo<MemberDTO>(_mapper.ConfigurationProvider), 
                 userParams.PageNumber, userParams.PageSize);

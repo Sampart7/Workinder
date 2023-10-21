@@ -26,6 +26,8 @@ import { PhotoEditorComponent } from './_components/members/photo-editor/photo-e
 import { DateInputComponent } from './forms/date-input/date-input.component';
 import { TextInputComponent } from './forms/text-input/text-input.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -50,10 +52,12 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
-    TabsModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot(),
+    TabsModule,
+    BsDropdownModule,
+    BsDatepickerModule,
+    ButtonsModule,
+    PaginationModule,
+    TimeagoModule.forRoot(),
     ToastrModule.forRoot({ positionClass: "toast-bottom-right" }),
     NgxSpinnerModule.forRoot({ type: "timer" }),
   ],

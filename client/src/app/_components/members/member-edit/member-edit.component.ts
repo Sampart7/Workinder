@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Member } from 'src/app/models/member';
-import { Tag } from 'src/app/models/tag';
 import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
 import { MembersService } from 'src/app/services/member.service';

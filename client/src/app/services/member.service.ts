@@ -51,9 +51,13 @@ export class MembersService {
     params = params.append('maxAge', userParams.maxAge);
     params = params.append('gender', userParams.gender);
     params = params.append('selectedTag', userParams.selectedTag);
+    params = params.append('orderBy', userParams.orderBy);
   
     return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params).pipe(
-      tap((response) => this.memberCache.set(Object.values(userParams).join('-'), response))
+      map(response => {
+        this.memberCache.set(Object.values(userParams).join('-'), response);
+        return response;
+      })
     );
   }
 

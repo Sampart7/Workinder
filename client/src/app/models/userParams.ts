@@ -5,4 +5,5 @@ export class UserParams {
   pageNumber = 1;
   pageSize = 4;
   selectedTag: string = "";
+  orderBy = "lastActive"
 }

@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Helpers.Paging;
 using API.Interfaces;
 using AutoMapper;
@@ -9,9 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepo;

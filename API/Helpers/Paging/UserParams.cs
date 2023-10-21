@@ -16,6 +16,6 @@ namespace API.Helpers.Paging
         public int MinAge { get; set; } = 18;
         public int MaxAge { get; set; } = 100;
         public string SelectedTag { get; set; }
-        //public string OrderBy { get; set; } = "lastActive";
+        public string OrderBy { get; set; } = "lastActive";
     }
 }
