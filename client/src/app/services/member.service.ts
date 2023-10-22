@@ -102,4 +102,18 @@ export class MembersService {
   deleteTag(tagId: number): Observable<any> {
     return this.http.delete(this.baseUrl + "users/delete-tag/" + tagId);
   }
+
+  addLike(email: string) {
+    return this.http.post(this.baseUrl + "likes/" + email, {});
+  }
+
+  getLikes(predicate: string, pageNumber: number, pageSize: number){
+    let params = new HttpParams();
+  
+    params = params.append("pageNumber", pageNumber);
+    params = params.append("pageSize", pageSize);
+    params = params.append('predicate', predicate);
+
+    return this.getPaginatedResult<Member[]>(this.baseUrl + "likes", params)
+  }
 }

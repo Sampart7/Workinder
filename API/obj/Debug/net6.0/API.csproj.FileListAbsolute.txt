@@ -19,11 +19,6 @@ C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\refint\API.dll
 C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\API.pdb
 C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\ref\API.dll
-C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Michał Janaszek\Desktop\Workinder\API\obj\Debug\net6.0\API.csproj.CopyComplete
 C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Michał Janaszek\Desktop\Workinder\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
