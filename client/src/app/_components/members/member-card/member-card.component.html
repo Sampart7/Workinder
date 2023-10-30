@@ -6,6 +6,9 @@
          <div class="img-bg"></div>
          <img src="{{member?.photoUrl}}" alt="{{member?.knownAs}}">
          <figcaption>{{member?.knownAs}}</figcaption>
+         <figcaption *ngIf="(presenceService.onlineUsers | async).includes(member.email)" class="write-now">
+          Write now!
+        </figcaption>
        </figure>
        <ul>
          <li>{{member?.city}}</li>

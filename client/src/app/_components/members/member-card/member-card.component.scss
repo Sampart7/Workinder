@@ -1,4 +1,3 @@
-/* default */
 *,
 *::after,
 *::before {
@@ -7,7 +6,6 @@
   box-sizing: border-box;
 }
 
-/* body */
 body {
   min-height: 100vh;
   padding: 40px;
@@ -20,7 +18,6 @@ body {
   background: hsl(220, 100%, 0%);
 }
 
-/* .flip-card-container */
 .flip-card-container {
   --hue: 150;
   --primary: hsl(var(--hue), 50%, 50%);
@@ -36,7 +33,6 @@ body {
   perspective: 1000px;
 }
 
-/* .flip-card */
 .flip-card {
   width: inherit;
   height: inherit;
@@ -46,13 +42,11 @@ body {
   transition: .6s .1s;
 }
 
-/* hover and focus-within states */
 .flip-card-container:hover .flip-card,
 .flip-card-container:focus-within .flip-card {
   transform: rotateY(180deg);
 }
 
-/* .card-... */
 .card-front,
 .card-back {
   width: 100%;
@@ -71,24 +65,20 @@ body {
   align-items: center;
 }
 
-/* .card-front */
 .card-front {
   transform: rotateY(0deg);
   z-index: 2;
 }
 
-/* .card-back */
 .card-back {
   transform: rotateY(180deg);
   z-index: 1;
 }
 
-/* figure */
 figure {
   z-index: -1;
 }
 
-/* figure, .img-bg */
 figure,
 .img-bg {
   position: absolute;
@@ -99,13 +89,11 @@ figure,
   height: 100%;
 }
 
-/* img */
 img {
   height: 100%;
   border-radius: 24px;
 }
 
-/* figcaption */
 figcaption {
   display: block;
 
@@ -126,7 +114,6 @@ figcaption {
   color: var(--white-1);
 }
 
-/* .img-bg */
 .img-bg {
   background: hsla(var(--hue), 25%, 10%, .5);
 }
@@ -147,14 +134,12 @@ figcaption {
   transition: .1s;
 }
 
-/* hover state */
 .flip-card-container:hover .card-front .img-bg::before {
   width: 6px;
   border-left-color: var(--primary);
   border-right-color: var(--primary);
 }
 
-/* ul */
 ul {
   padding-top: 50%;
   margin: 0 auto;
@@ -170,7 +155,6 @@ ul {
   flex-direction: column;
 }
 
-/* li */
 li {
   width: 100%;
   margin-top: 12px;
@@ -200,7 +184,6 @@ li:not(:last-child)::after {
   opacity: .2;
 }
 
-/* button */
 button {
   color: var(--dark);
 
@@ -219,7 +202,6 @@ button:active {
   transform: translate(2px);
 }
 
-/* .design-container */
 .design-container {
   --tr: 90;
   --op: .5;
@@ -235,7 +217,6 @@ button:active {
   pointer-events: none;
 }
 
-/* .design */
 .design {
   display: block;
 
@@ -326,7 +307,6 @@ button:active {
   font-size: 16px;
 }
 
-/* Button */
 .button-container button {
   color: var(--dark);
   letter-spacing: 2px;
@@ -341,12 +321,10 @@ button:active {
   cursor: pointer;
 }
 
-/* Button Hover State */
 .button-container button:hover {
-  transform: translate(0); /* Reset the transform */
+  transform: translate(0);
 }
 
-/* .design */
 .button-container .design {
   display: block;
   background: var(--white-1);
@@ -355,8 +333,14 @@ button:active {
   transition: .3s;
 }
 
-/* .design Hover State */
 .button-container:hover .design {
   --tr: 20;
   --op: .7;
+}
+
+.write-now {
+  display: block;
+  margin-top: 70px;
+  font-size: 12px;
+  color: var(--white-2);
 }
