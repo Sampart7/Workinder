@@ -5,6 +5,8 @@ namespace API.DTOs
     public class RegisterDTO
     {
         [Required(ErrorMessage = "Email is required")]
+        [RegularExpression("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", 
+        ErrorMessage = "Unvalid email address")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "KnownAs is required")]

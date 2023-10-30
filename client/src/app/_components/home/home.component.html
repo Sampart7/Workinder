@@ -1,20 +1,26 @@
-<div class="container" >
-    <div *ngIf="!register" style="text-align: center;">
-        <h1>Find your coworker</h1>
-        
-        <p class="lead">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec condimentum urna. Praesent eu viverra libero. In semper faucibus scelerisque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque ornare justo diam, a tincidunt est consectetur sed. Quisque lobortis placerat nibh vitae gravida. In a turpis et nulla pulvinar bibendum quis et mauris. Pellentesque vestibulum velit vitae dapibus imperdiet. Sed ut tortor sit amet tellus consequat suscipit nec a tellus. Mauris sed dolor a tortor aliquet gravida in ut sapien.
-        </p>
-
-        <div class="text-center">
-            <button (click)="registerToggle()" class="btn btn-primary me-1">Register</button>
-            <button class="btn btn-dark">Learn more</button>
+<div *ngIf="!user">
+    <div class="container">
+        <div *ngIf="!register" style="text-align: center;">
+            <h1>Find your coworker</h1>
+            
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec condimentum urna. Praesent eu viverra libero. In semper faucibus scelerisque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque ornare justo diam, a tincidunt est consectetur sed. Quisque lobortis placerat nibh vitae gravida. In a turpis et nulla pulvinar bibendum quis et mauris. Pellentesque vestibulum velit vitae dapibus imperdiet. Sed ut tortor sit amet tellus consequat suscipit nec a tellus. Mauris sed dolor a tortor aliquet gravida in ut sapien.
+            </p>
+    
+            <div class="text-center">
+                <button (click)="registerToggle()" class="btn btn-primary me-1">Register</button>
+                <button class="btn btn-dark">Learn more</button>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="register" class="container">
+        <div class="row justify-contnent-center">
+            <app-register (cancelRegister)="cancelRegisterToggle($event)"></app-register>
         </div>
     </div>
 </div>
 
-<div *ngIf="register" class="container">
-    <div class="row justify-contnent-center">
-        <app-register (cancelRegister)="cancelRegisterToggle($event)"></app-register>
-    </div>
+<div *ngIf="user">
+    <h1>Go to matches</h1>
 </div>

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="member">
+<div class="row">
     <div class="col-4">
         <div class="card">
             <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" 
@@ -24,31 +24,29 @@
             <div class="card-footer">
                 <div class="btn-group d-flex">
                     <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-dark">Message</button>
+                    <button (click)="selectTab('Messages')" class="btn btn-dark">Message</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-8">
-        <tabset class="member-tabset">
-            <tab heading='Interests'>
+        <tabset class="member-tabset" #memberTabs>
+            <tab heading='About {{ member.knownAs }}' (selectTab)="onTabActivated($event)">
                 <h4>Interests</h4>
                 <p>{{member.interests}}</p>
+
+                <h5>Tags:</h5>
+                <ul *ngFor="let tag of member.tags">
+                    <li>{{ tag.name }}</li>
+                </ul>
             </tab>
-            <tab heading='Photos' #photoTab="tab">
+            <tab heading='Photos' #photoTab="tab" (selectTab)="onTabActivated($event)">
                 <gallery *ngIf="photoTab.active" [items]="images"></gallery>
             </tab>
-            <tab heading='Messages'>
-                <p>Messages will go here</p>
-            </tab>
-            <tab heading='Tags'>
-                <label for="tags">Tags: </label>
-                <ul>
-                    <li *ngFor="let tag of member.tags">{{ tag.name }}</li>
-                </ul>
+            <tab heading='Messages' (selectTab)="onTabActivated($event)">
+                <app-member-messages [email]="member.email" [messages]="messages"></app-member-messages>
             </tab>
         </tabset>
     </div>
-    
 </div>

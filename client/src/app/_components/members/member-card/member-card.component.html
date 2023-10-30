@@ -21,9 +21,12 @@
        </figure>
 
        <div class="button-container">
-        <button class="btn" [routerLink]="'/members/' + member?.email">Show</button>
+        <button class="btn" [routerLink]="'/members/' + member.email">Show</button>
+
         <button class="btn" (click)="addLike(member)">Like</button>
-        <button class="btn" [routerLink]="'/members/' + member?.email">Message</button>
+
+        <button class="btn" [routerLink]="'/members/' + member.email" [queryParams]="{tab: 'Messages'}">Message</button>
+
         <div class="design-container">
           <ng-container *ngFor="let design of [1, 2, 3, 4, 5, 6, 7, 8]">
             <span class="design" [class]="'design--' + design"></span>
