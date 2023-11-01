@@ -27,7 +27,7 @@ namespace API.Controllers
         [HttpPost("{email}")]
         public async Task<ActionResult> AddLike(string email)
         {
-            var sourceUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var sourceUserId = User.GetId();
 
             var likedUser = await _userRepo.GetUserByEmailAsync(email);
             var sourceUser = await _likesRepo.GetUserWithLikes(sourceUserId);
@@ -54,7 +54,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<LikeDTO>>> GetUserLikes([FromQuery] LikesParams likesParams)
         {
-            likesParams.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            likesParams.UserId = User.GetId();
 
             var users = await _likesRepo.GetUserLikes(likesParams);
 

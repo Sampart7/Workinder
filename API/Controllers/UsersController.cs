@@ -29,7 +29,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var currentUser = await _userRepo.GetUserByEmailAsync(User.FindFirst(ClaimTypes.Name)?.Value);
+            var currentUser = await _userRepo.GetUserByEmailAsync(User.GetEmail());
             userParams.CurrentEmail = currentUser.Email;
 
             var users = await _userRepo.GetMembersAsync(userParams);
@@ -49,7 +49,7 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDTO memberUpdateDTO)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
@@ -64,7 +64,7 @@ namespace API.Controllers
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
@@ -94,7 +94,7 @@ namespace API.Controllers
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 
@@ -115,7 +115,7 @@ namespace API.Controllers
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 
@@ -140,7 +140,7 @@ namespace API.Controllers
         [HttpPost("add-tag")]
         public async Task<ActionResult> AddTags([FromBody] TagDTO tagDTO)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
 
             if (user == null) return NotFound();
@@ -161,7 +161,7 @@ namespace API.Controllers
         [HttpDelete("delete-tag/{tagId}")]
         public async Task<ActionResult> DeleteTag(int tagId)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var user = await _userRepo.GetUserByEmailAsync(email);
             if (user == null) return NotFound();
 

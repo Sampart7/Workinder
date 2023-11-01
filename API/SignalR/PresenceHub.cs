@@ -1,4 +1,4 @@
-using System.Security.Claims;
+using API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
@@ -15,28 +15,21 @@ namespace API.SignalR
         }
         public override async Task OnConnectedAsync() 
         {
-            var userEmail = Context.User.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = Context.User.GetEmail();
+            var isOnline = await _tracker.UserConnected(userEmail, Context.ConnectionId);
 
-            if (string.IsNullOrEmpty(userEmail)) return;
-
-            await _tracker.UserConnected(userEmail, Context.ConnectionId);
-            await Clients.Others.SendAsync("UserIsOnline", userEmail);
+            if (isOnline) await Clients.Others.SendAsync("UserIsOnline", userEmail);
 
             var currentUsers = await _tracker.GetOnlineUsers();
-            await Clients.All.SendAsync("GetOnlineUsers", currentUsers);
+            await Clients.Caller.SendAsync("GetOnlineUsers", currentUsers);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            var userEmail = Context.User.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = Context.User.GetEmail();
+            var isOffline = await _tracker.UserDisconnected(userEmail, Context.ConnectionId);
 
-            if (string.IsNullOrEmpty(userEmail)) return;
-
-            await _tracker.UserDisconnected(userEmail, Context.ConnectionId);
-            await Clients.Others.SendAsync("UserIsOffline", userEmail);
-
-            var currentUsers = await _tracker.GetOnlineUsers();
-            await Clients.All.SendAsync("GetOnlineUsers", currentUsers);
+            if (isOffline) await Clients.Others.SendAsync("UserIsOffline", userEmail);
 
             await base.OnDisconnectedAsync(exception);
         }

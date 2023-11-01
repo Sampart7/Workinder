@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -31,9 +30,10 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<MessageDTO>> CreateMessage(CreateMessageDTO createMessageDTO)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
 
-            if (email == createMessageDTO.RecipientEmail.ToLower()) return BadRequest("You cannot send messages to yourself");
+            if (email == createMessageDTO.RecipientEmail.ToLower()) 
+            return BadRequest("You cannot send messages to yourself");
 
             var sender = await _userRepo.GetUserByEmailAsync(email);
             var recipient = await _userRepo.GetUserByEmailAsync(createMessageDTO.RecipientEmail);
@@ -59,7 +59,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<MessageDTO>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
         {
-            messageParams.Email = User.FindFirst(ClaimTypes.Name)?.Value;
+            messageParams.Email = User.GetEmail();
             var messages = await _messageRepo.GetMessagesForUser(messageParams);
 
             Response.AddPaginationHeader(new PaginationHeader(messages.CurrentPage, messages.PageSize, 
@@ -71,14 +71,14 @@ namespace API.Controllers
         [HttpGet("thread/{email}")]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetMessageThread(string email)
         {
-            var currentEmail = User.FindFirst(ClaimTypes.Name)?.Value;
+            var currentEmail = User.GetEmail();
             return Ok(await _messageRepo.GetMessageThread(currentEmail, email));
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {
-            var email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var email = User.GetEmail();
             var message = await _messageRepo.GetMessage(id);
 
             if (email != message.RecipientEmail && email != message.SenderEmail) return Unauthorized();
@@ -92,7 +92,5 @@ namespace API.Controllers
 
             return BadRequest("Failed deleting the message");
         }
-
-        
     }
 }

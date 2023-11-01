@@ -11,7 +11,7 @@ namespace API.Helpers
             var resultContext = await next();
             if (!resultContext.HttpContext.User.Identity!.IsAuthenticated) return;
             
-            var userEmail = resultContext.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            var userEmail = resultContext.HttpContext.User.GetEmail();
 
             var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
 

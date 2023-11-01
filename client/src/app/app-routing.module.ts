@@ -9,6 +9,7 @@ import { MemberEditComponent } from './_components/members/member-edit/member-ed
 import { ListsComponent } from './_components/lists/lists.component';
 import { MessagesComponent } from './_components/messages/messages.component';
 import { memberDetailResolver } from './_helpers/resolvers/member-detail.resolver';
+import { MemberVideosComponent } from './_components/members/member-videos/member-videos.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
       {path: "members/:username", component: MemberDetailComponent, resolve: {member: memberDetailResolver}},
       {path: "member/edit", component: MemberEditComponent, canDeactivate: [unsavedChangesGuard]},
       {path: "lists", component: ListsComponent},
-      {path: "messages", component: MessagesComponent}
+      {path: "messages", component: MessagesComponent},
+      {path: "videos", component: MemberVideosComponent}
     ]
   },
   {path: "**", component: HomeComponent, pathMatch: "full"},
