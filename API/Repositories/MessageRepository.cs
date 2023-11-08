@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -7,7 +8,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data
+namespace API.Repositories
 {
     public class MessageRepository : IMessageRepository
     {
@@ -75,9 +76,7 @@ namespace API.Data
 
         public async Task<IEnumerable<MessageDTO>> GetMessageThread(string currentEmail, string recipientEmail)
         {
-            var messages = await _ctx.Messages
-                .Include(u => u.Sender).ThenInclude(p => p.Photos)
-                .Include(u => u.Recipient).ThenInclude(p => p.Photos)
+            return await _ctx.Messages
                 .Where(m => 
                     m.RecipientEmail == currentEmail && 
                     m.RecipientDeleted == false &&
@@ -87,29 +86,15 @@ namespace API.Data
                     m.SenderDeleted == false && 
                     m.RecipientEmail == recipientEmail
                 )
+                .MarkUnreadAsRead(currentEmail)
                 .OrderBy(m => m.TimeSent)
+                .ProjectTo<MessageDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
-
-            var unreadMessages = messages.Where(m => m.TimeRead == null && m.RecipientEmail == currentEmail).ToList();
-
-            if (unreadMessages.Any())
-            {
-                foreach (var message in unreadMessages) message.TimeRead = DateTime.UtcNow;
-
-                await _ctx.SaveChangesAsync();
-            }
-
-            return _mapper.Map<IEnumerable<MessageDTO>>(messages);
         }
 
         public void RemoveConnection(Connection connection)
         {
             _ctx.Connections.Remove(connection);
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _ctx.SaveChangesAsync() > 0;
         }
     }
 }

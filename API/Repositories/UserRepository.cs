@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Helpers.Paging;
@@ -6,7 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data
+namespace API.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -76,15 +77,9 @@ namespace API.Data
                 .ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _ctx.SaveChangesAsync() > 0;
-        }
-
         public void Update(AppUser user)
         {
             _ctx.Entry(user).State = EntityState.Modified;
         }
-
     }
 }

@@ -22,17 +22,12 @@ namespace API.Interfaces
             var user = await _ctx.Users
                 .Include(u => u.Tags)
                 .FirstOrDefaultAsync(u => u.Id == appUserId);
-
             if (user == null) return null;
 
             var existingTag = user.Tags.FirstOrDefault(t => t.Name == tagDTO.Name);
-
             if (existingTag != null) return null;
 
-            var tag = new Tag
-            {
-                Name = tagDTO.Name
-            };
+            var tag = new Tag { Name = tagDTO.Name };
 
             user.Tags.Add(tag);
 
@@ -46,11 +41,9 @@ namespace API.Interfaces
             var user = await _ctx.Users
                 .Include(u => u.Tags)
                 .FirstOrDefaultAsync(u => u.Id == appUserId);
-
             if (user == null) return false;
 
             var tag = user.Tags.FirstOrDefault(t => t.Id == tagId);
-
             if (tag == null) return false;
 
             user.Tags.Remove(tag);

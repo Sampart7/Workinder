@@ -1,3 +1,4 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
@@ -5,7 +6,7 @@ using API.Helpers.Paging;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data
+namespace API.Repositories
 {
     public class LikesRepository : ILikesRepository
     {

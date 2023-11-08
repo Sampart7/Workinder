@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using API.SignalR;
+using API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +18,10 @@ builder.Services.AddControllers().AddJsonOptions(options => {
 });
 
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<LogUserActivity>();
-builder.Services.AddScoped<ILikesRepository, LikesRepository>();
-builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<PresenceTracker>();
 
@@ -62,6 +61,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddSignalR();
 
 var app = builder.Build();
+
+var applicationLifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+
+applicationLifetime.ApplicationStopping.Register(() =>
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+        
+        dbContext.Connections.RemoveRange(dbContext.Connections);
+        dbContext.SaveChanges();
+    }
+});
 
 app.UseHttpsRedirection();
 

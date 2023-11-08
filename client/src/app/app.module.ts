@@ -28,6 +28,9 @@ import { TextInputComponent } from './forms/text-input/text-input.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ConfirmService } from './services/confirm.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PhotoEditorComponent,
     DateInputComponent,
     TextInputComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,7 @@ import { TimeagoModule } from 'ngx-timeago';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    BsModalService, ConfirmService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,12 +13,12 @@ namespace API.Helpers
             
             var userEmail = resultContext.HttpContext.User.GetEmail();
 
-            var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
+            var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUnitOfWork>();
 
-            var user = await repo.GetUserByEmailAsync(userEmail);
+            var user = await repo.UserRepository.GetUserByEmailAsync(userEmail);
             user.LastActive = DateTime.UtcNow;
 
-            await repo.SaveAllAsync();
+            await repo.Complete();
         }
     }
 }

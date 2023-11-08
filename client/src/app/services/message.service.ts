@@ -6,7 +6,6 @@ import { getPaginatedResult } from './paginationHelper';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { User } from '../models/user';
 import { BehaviorSubject, take } from 'rxjs';
-import { group } from '@angular/animations';
 import { Group } from '../models/group';
 
 @Injectable({
@@ -23,38 +22,30 @@ export class MessageService {
 
   createHubConnection(user: User, otherEmail: string) {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(this.hubUrl + "message?user=" + otherEmail, {
-        accessTokenFactory: () => user.token
-      })
+      .withUrl(this.hubUrl + "message?user=" + otherEmail, {accessTokenFactory: () => user.token})
       .withAutomaticReconnect()
       .build();
 
-      this.hubConnection.start().catch(error => console.log(error));
+    this.hubConnection.start().catch(error => console.log(error));
 
-      this.hubConnection.on("ReceiveMessageThread", messages => {
-        this.messageThreadSource.next(messages);
-      })
+    this.hubConnection.on("ReceiveMessageThread", messages => this.messageThreadSource.next(messages))
 
-      this.hubConnection.on("UpdatedGroup", (group: Group) => {
-        if (group.connections.some(x => x.email == otherEmail)) {
-          this.messageThread.pipe(take(1)).subscribe({
-            next: messages => {
-              messages.forEach(message => {
-                if (!message.timeRead) {
-                  message.timeRead = new Date(Date.now())
-                }
-              })
-              this.messageThreadSource.next([...messages]);
-            }
-          })
-        }
-      })
-
-      this.hubConnection.on("NewMessage", message => {
+    this.hubConnection.on("UpdatedGroup", (group: Group) => {
+      if (group.connections.some(x => x.email == otherEmail)) {
         this.messageThread.pipe(take(1)).subscribe(messages => {
-          this.messageThreadSource.next([...messages, message])
-        })
+            messages.forEach(message => {
+              if (!message.timeRead) message.timeRead = new Date(Date.now())
+            })
+            this.messageThreadSource.next([...messages]);
+          })
+      }
+    })
+
+    this.hubConnection.on("NewMessage", message => {
+      this.messageThread.pipe(take(1)).subscribe(messages => {
+        this.messageThreadSource.next([...messages, message])
       })
+    })
   }
 
   stopHubConnection() {
