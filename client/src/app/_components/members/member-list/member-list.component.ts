@@ -14,7 +14,8 @@ export class MemberListComponent implements OnInit {
   members: Member[] = [];
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
-
+  isLikedPage = false;
+  
   genderList = [
     {value: 'all', display: 'All' },
     {value: 'male', display: 'Males'}, 
@@ -26,7 +27,10 @@ export class MemberListComponent implements OnInit {
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
-    this.tagList = [".NET", "C", "C++", "Java"];
+    this.tagList = ["", "MySQL", "PostgreSQL", "SQLite", "MongoDB", "Microsoft SQL Server", 
+      "Spring", "Django", "Laravel", "Flask", ".NET", "JavaScript", "HTML", "CSS", "SQL", 
+      "Python", "TypeScript", "Node.js", "Java", "C#", "PHP", "C++", "C", "Kotlin",
+      "Angular", "React", "Ember", "Vue.js"];
     this.selectedTag = null;
   }
 

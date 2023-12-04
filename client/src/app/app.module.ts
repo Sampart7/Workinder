@@ -46,7 +46,7 @@ import { ConfirmService } from './services/confirm.service';
     PhotoEditorComponent,
     DateInputComponent,
     TextInputComponent,
-    ConfirmDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

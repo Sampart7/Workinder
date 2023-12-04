@@ -6377,11 +6377,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+      "projectUniqueName": "C:\\Program Files (x86)\\Moje rzeczy\\4 Szkoła\\Workinder\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+      "projectPath": "C:\\Program Files (x86)\\Moje rzeczy\\4 Szkoła\\Workinder\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Michał Janaszek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\obj\\",
+      "outputPath": "C:\\Program Files (x86)\\Moje rzeczy\\4 Szkoła\\Workinder\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Michał Janaszek\\AppData\\Roaming\\NuGet\\NuGet.Config"

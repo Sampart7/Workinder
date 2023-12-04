@@ -1,23 +1,20 @@
 <div class="mb-4 d-flex">
     <div class="btn-group" name="container">
-      <button class="btn btn-primary"
-              btnRadio="Unread"
-              [(ngModel)]="container"
-              (click)="loadMessages()">
-        <i class="fa fa-envelope"></i> Unread
-      </button>
-      <button class="btn btn-primary"
-              btnRadio="Inbox"
-              [(ngModel)]="container"
-              (click)="loadMessages()">
-        <i class="fa fa-envelope-open"></i> Inbox
-      </button>
-      <button class="btn btn-primary"
-              btnRadio="Outbox"
-              [(ngModel)]="container"
-              (click)="loadMessages()">
-        <i class="fa fa-paper-plane"></i> Outbox
-      </button>
+        <button class="btn" [ngClass]="{'btn-primary': container === 'Unread', 'btn-secondary': container !== 'Unread'}"
+                btnRadio="Unread"
+                [(ngModel)]="container"
+                (click)="loadMessages()">Unread
+        </button>
+        <button class="btn" [ngClass]="{'btn-primary': container === 'Inbox', 'btn-secondary': container !== 'Inbox'}"
+                btnRadio="Inbox"
+                [(ngModel)]="container"
+                (click)="loadMessages()">Inbox
+        </button>
+        <button class="btn" [ngClass]="{'btn-primary': container === 'Outbox', 'btn-secondary': container !== 'Outbox'}"
+                btnRadio="Outbox"
+                [(ngModel)]="container"
+                (click)="loadMessages()">Outbox
+        </button>
     </div>
 </div>
 

@@ -1,12 +1,14 @@
 <div class="card">
-    <div class="card-body">
+  <button class="btn btn-info" (click)="toggleView()">Switch View</button>
+
+    <div *ngIf="isChatView">
       <div *ngIf="(messageService.messageThread | async)?.length === 0">
         No messages yet... Say hi by using the message box below!
       </div>
 
       <ul 
       #scrollMe
-      style="overflow-y: scroll; height: 750px;"
+      style="overflow-y: scroll; height: 450px;"
       [scrollTop]="scrollMe.scrollHeight"
       class="chat" *ngIf="(messageService.messageThread | async)!.length > 0">
         <li *ngFor="let message of (messageService.messageThread | async)">
@@ -46,4 +48,47 @@
       </div>
 
     </div>
+
+    <!-- W momencie zmiany okna zmieniaj tylko cssa a nie całe działanie kodu -->
+    <!-- Będzie działać przysięgam -->
+    
+    <div *ngIf="!isChatView">
+      <div class="row">
+        <div class="col-12">
+            <nav class="nav nav-pills nav-fill">
+              <button class="btn" [ngClass]="{'btn-dark': enableAudio, 'btn-danger': !enableAudio}" 
+                (click)="enableOrDisableAudio()">
+                Mute
+              </button>
+              
+              <button class="btn" [ngClass]="{'btn-dark': enableVideo, 'btn-danger': !enableVideo}" 
+                (click)="enableOrDisableVideo()">
+                Camera
+              </button>
+              
+            </nav>
+        </div>
+      </div>
+      
+      <div class="row mt-1">
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="width: 100%;">
+                <div class="card-body" style="padding: 0;">
+                    <video #videoPlayer width="100%" height="100%" controls></video>
+                </div>
+            </div>
+      
+            <button class="btn btn-primary" 
+              (click)="connectToPeer(otherMember.knownAs)">
+              Connect to Peer</button>
+              
+            <button class="btn btn-danger" 
+              (click)="disconnectFromPeer()">
+              Disconnect</button>
+      
+            <video *ngIf="connections.length > 0" #remoteVideoPlayer width="100%" height="100%" controls></video>
+        </div>
+      </div>
+    </div>
+
 </div>

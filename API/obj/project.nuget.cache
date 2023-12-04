@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "50x6M82l6tn9GdhAXlQhwxVv2g5cOKLQuUJuGTzMo6RGs1x21TMQwdeGS+0GLpuuXJuI1plHWU6YXomOIqoYrA==",
+  "dgSpecHash": "p8XE7j43TYL9aISofzGDinOfGauiRtFeo/uoyjZt1leXOV0zNc+Cxuh8hIgGepeZP9P4+w6y38pMdgdqoy48Qw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Michał Janaszek\\Desktop\\Workinder\\API\\API.csproj",
+  "projectFilePath": "C:\\Program Files (x86)\\Moje rzeczy\\4 Szkoła\\Workinder\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Michał Janaszek\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Michał Janaszek\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

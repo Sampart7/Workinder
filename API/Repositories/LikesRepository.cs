@@ -45,6 +45,7 @@ namespace API.Repositories
                 Age = user.DateofBirth.CalculateAge(),
                 PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain).Url,
                 City = user.City,
+                Country = user.Country,
                 Id = user.Id
             });
 
@@ -56,6 +57,11 @@ namespace API.Repositories
         return await _ctx.Users
             .Include(x => x.LikedUsers)
             .FirstOrDefaultAsync(x => x.Id == userId);
+        }
+
+        public void DeleteLike(UserLike userLike)
+        {
+            _ctx.Likes.Remove(userLike);
         }
     }
 }

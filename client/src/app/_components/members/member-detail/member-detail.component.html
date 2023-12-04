@@ -20,13 +20,15 @@
                     <strong>Age:</strong>
                     <p>{{member.age}}</p>
                 </div>
-                <div>
-                    <strong>Last Active:</strong>
-                    <p>{{member.lastActive + "Z" | timeago}}</p>
-                </div>
+
                 <div>
                     <strong>Member since:</strong>
                     <p>{{member.created | date}}</p>
+                </div>
+
+                <div *ngIf="!(presenceService.onlineUsers | async).includes(member.email)">
+                    <strong>Last Active:</strong>
+                    <p>{{member.lastActive | timeago}}</p>
                 </div>
             </div>
             <div class="card-footer">
@@ -53,10 +55,7 @@
                 <gallery *ngIf="photoTab.active" [items]="images"></gallery>
             </tab>
             <tab heading='Messages' (selectTab)="onTabActivated($event)">
-                <app-member-messages [email]="member.email"></app-member-messages>
-            </tab>
-            <tab heading='Videos' (selectTab)="onTabActivated($event)">
-                <!-- <app-member-videos></app-member-videos> -->
+                <app-member-messages [email]="member.email"></app-member-messages> 
             </tab>
         </tabset>
     </div>

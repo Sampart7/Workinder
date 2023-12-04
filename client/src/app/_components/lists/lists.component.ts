@@ -15,7 +15,8 @@ export class ListsComponent implements OnInit {
   pageSize = 5;
   pagination: Pagination | undefined;
   likes: number = 0;
-
+  isLikedPage = true;
+  
   constructor(private membersService: MembersService) { }
 
   ngOnInit(): void {
@@ -38,5 +39,4 @@ export class ListsComponent implements OnInit {
       this.loadLikes();
     }
   }
-
 }

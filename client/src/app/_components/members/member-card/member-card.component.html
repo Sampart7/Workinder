@@ -4,29 +4,30 @@
      <div class="card-front">
        <figure>
          <div class="img-bg"></div>
-         <img src="{{member?.photoUrl}}" alt="{{member?.knownAs}}">
-         <figcaption>{{member?.knownAs}}</figcaption>
+         <img src="{{member.photoUrl}}" alt="{{member.knownAs}}">
+         <figcaption>{{member.knownAs}}</figcaption>
          <figcaption *ngIf="(presenceService.onlineUsers | async).includes(member.email)" class="write-now">
           Write now!
         </figcaption>
        </figure>
        <ul>
-         <li>{{member?.city}}</li>
-         <li>{{member?.country}}</li>
-         <li>{{member?.age}}</li>
+         <li>{{member.city}}</li>
+         <li>{{member.country}}</li>
+         <li>{{member.age}}</li>
        </ul>
      </div>
  
      <div class="card-back">
        <figure>
          <div class="img-bg"></div>
-         <img src="{{member?.photoUrl}}" alt="{{member?.knownAs}}">
+         <img src="{{member.photoUrl}}" alt="{{member?.knownAs}}">
        </figure>
 
        <div class="button-container">
         <button class="btn" [routerLink]="'/members/' + member.email">Show</button>
 
-        <button class="btn" (click)="addLike(member)">Like</button>
+        <button *ngIf="!isLikedPage" class="btn" (click)="addLike(member)">Like</button>
+        <button *ngIf="isLikedPage" class="btn" (click)="deleteLike(member.id)">Unlike</button>     
 
         <button class="btn" [routerLink]="'/members/' + member.email" [queryParams]="{tab: 'Messages'}">Message</button>
 

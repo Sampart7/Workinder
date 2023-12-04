@@ -31,6 +31,8 @@
     "ngx-timeago": "^3.0.0",
     "ngx-toastr": "^17.0.2",
     "ngx-webrtc": "^0.2.4",
+    "peer": "^1.0.1",
+    "peerjs": "^1.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

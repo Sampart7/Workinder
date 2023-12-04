@@ -9,16 +9,14 @@ import { MemberMessagesComponent } from '../member-messages/member-messages.comp
 import { MessageService } from 'src/app/services/message.service';
 import { Message } from 'src/app/models/message';
 import { PresenceService } from 'src/app/services/presence.service';
-import { MemberVideosComponent } from '../member-videos/member-videos.component';
 import { AccountService } from 'src/app/services/account.service';
 import { take } from 'rxjs';
 import { User } from 'src/app/models/user';
-
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   standalone: true,
-  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent, MemberVideosComponent],
+  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent],
   styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {

@@ -5,8 +5,9 @@ import { Message } from '../models/message';
 import { getPaginatedResult } from './paginationHelper';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { User } from '../models/user';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, Subject, take } from 'rxjs';
 import { Group } from '../models/group';
+import { MuteService } from './mute.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class MessageService {
   private hubConnection?: HubConnection;
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread = this.messageThreadSource.asObservable();
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private muteCamMicro: MuteService) {}
 
   createHubConnection(user: User, otherEmail: string) {
     this.hubConnection = new HubConnectionBuilder()
@@ -45,6 +46,16 @@ export class MessageService {
       this.messageThread.pipe(take(1)).subscribe(messages => {
         this.messageThreadSource.next([...messages, message])
       })
+    })
+
+    this.hubConnection.on('OnMuteMicro', ({username, mute}) => {
+      this.muteCamMicro.Microphone = {username, mute}
+      console.log("mic", username, mute)
+    })
+
+    this.hubConnection.on('OnMuteCamera', ({username, mute}) => {
+      this.muteCamMicro.Camera = {username, mute}
+      console.log("cam", username, mute)
     })
   }
 
@@ -73,6 +84,16 @@ export class MessageService {
 
   deleteMessage(id: number){
     return this.http.delete(this.baseUrl + 'messages/' + id);
+  }
+
+  async muteMicroPhone(mute: boolean){    
+    return this.hubConnection.invoke('MuteMicro', mute)
+      .catch(error => console.log(error));
+  }
+
+  async muteCamera(mute: boolean){    
+    return this.hubConnection.invoke('MuteCamera', mute)
+      .catch(error => console.log(error));
   }
   
 }

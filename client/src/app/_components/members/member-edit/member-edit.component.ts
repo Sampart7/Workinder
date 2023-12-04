@@ -23,7 +23,10 @@ export class MemberEditComponent implements OnInit {
     }
   }
   newTagName: string = '';
-  availableTags: string[] = [".NET", "C", "C++", "Java"];
+  availableTags: string[] = ["", "MySQL", "PostgreSQL", "SQLite", "MongoDB", "Microsoft SQL Server", 
+    "Spring", "Django", "Laravel", "Flask", ".NET", "JavaScript", "HTML", "CSS", "SQL", 
+    "Python", "TypeScript", "Node.js", "Java", "C#", "PHP", "C++", "C", "Kotlin",
+    "Angular", "React", "Ember", "Vue.js"];
 
   constructor(private accountService: AccountService, 
     private memberService: MembersService, 
@@ -44,16 +47,14 @@ export class MemberEditComponent implements OnInit {
       return;
     }
   
-    this.memberService.addTag(this.newTagName).subscribe(
-      (response) => {
+    this.memberService.addTag(this.newTagName).subscribe((response) => {
         this.member.tags.push(response);
         this.newTagName = '';
       });
   }
 
   deleteTag(tagId: number) {
-    this.memberService.deleteTag(tagId).subscribe(
-      () => {
+    this.memberService.deleteTag(tagId).subscribe(() => {
         this.member.tags = this.member.tags.filter(tag => tag.id !== tagId)
       });
   }

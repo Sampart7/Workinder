@@ -34,6 +34,7 @@ namespace API.SignalR
             var group = await AddToGroup(groupName);
 
             await Clients.Group(groupName).SendAsync("UpdatedGroup", group);
+            await Clients.Group(groupName).SendAsync("UserOnlineInGroup", group);
 
             var messages = await 
                 _unitOfWork.MessageRepository.GetMessageThread(Context.User.GetEmail(), otherUser);
@@ -47,6 +48,7 @@ namespace API.SignalR
         {
             var group = await RemoveFromGroup();
             await Clients.Group(group.Name).SendAsync("UpdatedGroup");
+            
             await base.OnDisconnectedAsync(exception);
         }
 
@@ -130,6 +132,34 @@ namespace API.SignalR
             if (await _unitOfWork.Complete()) return group;
 
             throw new HubException("Failed to remove from group");
+        }
+
+        public async Task MuteMicro(bool muteMicro)
+        {
+            var group = await _unitOfWork.MessageRepository.GetGroupForConnection(Context.ConnectionId);
+            
+            if (group != null)
+            {
+                await Clients.Group(group.Name).SendAsync("OnMuteMicro", new { 
+                    username = Context.User.GetEmail(), 
+                    mute = muteMicro 
+                });
+            }
+            else throw new HubException("group == null");
+        }
+
+        public async Task MuteCamera(bool muteCamera)
+        {
+            var group = await _unitOfWork.MessageRepository.GetGroupForConnection(Context.ConnectionId);
+            
+            if(group != null) 
+            {
+                await Clients.Group(group.Name).SendAsync("OnMuteCamera", new { 
+                    username = Context.User.GetEmail(), 
+                    mute = muteCamera 
+                });
+            }
+            else throw new HubException("group == null");
         }
     }
 }

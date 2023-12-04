@@ -16,7 +16,7 @@
 <div *ngIf="likes > 0">
   <div class="row">
     <div class="col-md-3" *ngFor="let member of members">
-      <app-member-card [member]="member"></app-member-card>
+      <app-member-card [isLikedPage]="isLikedPage" (likeDeleted)="loadLikes()" [member]="member"></app-member-card>
     </div>
   </div>
   

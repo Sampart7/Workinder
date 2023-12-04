@@ -105,4 +105,12 @@ export class MembersService {
 
     return getPaginatedResult<Member[]>(this.baseUrl + "likes", params, this.http)
   }
+
+  deleteLike(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + 'likes/' + id);
+  }
+
+  isUserLiked(memberId: number): Observable<boolean> {
+    return this.http.get<boolean>(this.baseUrl + 'likes/isLiked/' + memberId);
+  }
 }

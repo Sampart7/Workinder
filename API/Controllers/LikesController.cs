@@ -60,6 +60,20 @@ namespace API.Controllers
                 
             return Ok(users);
         }
-        
+
+        [HttpDelete("{targetUserId}")]
+        public async Task<ActionResult> DeleteLike(int targetUserId)
+        {
+            var sourceUserId = User.GetId();
+
+            var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, targetUserId);
+            if (userLike == null) return NotFound("You do not like this user.");
+
+            _unitOfWork.LikesRepository.DeleteLike(userLike);
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to unlike the user");
+        }
     }
 }
