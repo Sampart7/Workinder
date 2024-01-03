@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/models/member';
 import { MembersService } from 'src/app/services/member.service';
@@ -12,10 +13,10 @@ import { PresenceService } from 'src/app/services/presence.service';
 export class MemberCardComponent {
   @Input() member: Member | undefined;
   @Input() isLikedPage: boolean = false;
-  @Output() likeDeleted = new EventEmitter<void>();
+  @Output() likeDeleted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private memberService: MembersService, private toastr: ToastrService, 
-    public presenceService: PresenceService) { }
+    public presenceService: PresenceService, private router: Router) { }
 
   addLike(member: Member){
     this.memberService.addLike(member.email).subscribe({
@@ -25,7 +26,6 @@ export class MemberCardComponent {
   }
 
   deleteLike(id: number) {
-    this.memberService.deleteLike(id).subscribe(() => {})
-    this.likeDeleted.emit();
+    this.memberService.deleteLike(id).subscribe(() => this.likeDeleted.emit())
   }
 }

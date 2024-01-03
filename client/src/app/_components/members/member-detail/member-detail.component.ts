@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TabDirective, TabsModule, TabsetComponent } from 'ngx-bootstrap/tabs';
@@ -12,11 +12,14 @@ import { PresenceService } from 'src/app/services/presence.service';
 import { AccountService } from 'src/app/services/account.service';
 import { take } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { MemberVideoComponent } from '../member-video/member-video.component';
+import { MembersService } from 'src/app/services/member.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   standalone: true,
-  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent],
+  imports: [CommonModule, TabsModule, GalleryModule, TimeagoModule, MemberMessagesComponent, MemberVideoComponent],
   styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
@@ -28,7 +31,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   user? : User;
   
   constructor(private acountService: AccountService, private route: ActivatedRoute, 
-    private messageService: MessageService, public presenceService: PresenceService) {
+    private messageService: MessageService, public presenceService: PresenceService, 
+    private memberService: MembersService, private toastr: ToastrService) {
       this.acountService.currentUser.pipe(take(1)).subscribe({
         next: user => {
           if (user) this.user = user;
@@ -62,9 +66,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   }
 
   selectTab(heading: string) {
-    if (this.member) {
-      this.memberTabs.tabs.find(h => h.heading == heading).active = true;
-    }
+    if (this.member) this.memberTabs.tabs.find(h => h.heading == heading).active = true;
   }
 
   loadMessages() {
@@ -80,5 +82,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     for (const photo of this.member.photos) {
       this.images.push(new ImageItem({src: photo.url, thumb: photo.url}))
     }
+  }
+
+  addLike(member: Member){
+    this.memberService.addLike(member.email).subscribe({
+      next: () => this.toastr.success('You have liked ' + member.knownAs),
+      error: () => this.toastr.error("You already liked this user")
+    })
   }
 }

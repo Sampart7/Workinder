@@ -247,3 +247,6 @@ C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\obj\Debug\net6.0\refi
 C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\obj\Debug\net6.0\API.pdb
 C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\obj\Debug\net6.0\ref\API.dll
+C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\bin\Debug\net6.0\Castle.Core.dll
+C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Program Files (x86)\Moje rzeczy\4 Szkoła\Workinder\API\bin\Debug\net6.0\Moq.dll

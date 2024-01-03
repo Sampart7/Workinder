@@ -21,10 +21,6 @@
                     <p>{{member.age}}</p>
                 </div>
                 <div>
-                    <strong>Last Active:</strong>
-                    <p>{{member.lastActive + "Z" | timeago}}</p>
-                </div>
-                <div>
                     <strong>Member since:</strong>
                     <p>{{member.created | date}}</p>
                 </div>
@@ -84,16 +80,19 @@
                       <option *ngFor="let tag of availableTags" [value]="tag">{{ tag }}</option>
                     </select>
                   <button class="btn btn-primary" (click)="addTag()">Add Tag</button>
-                  
                 </div>
               
                 <label for="tags">Tags: </label>
-                <ul>
-                  <li *ngFor="let tag of member.tags">
-                    {{ tag.name }}
-                    <button class="btn btn-danger btn-sm" (click)="deleteTag(tag.id)">Delete</button>
-                  </li>
-                </ul>
+                <table class="table">
+                    <tbody>
+                      <tr *ngFor="let tag of member.tags">
+                        <td>{{ tag.name }}</td>
+                        <td>
+                          <button class="btn btn-danger" (click)="deleteTag(tag.id)">Delete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
               </tab>      
         </tabset>
     </div>

@@ -1,0 +1,31 @@
+<div class="row mt-1">
+  <div class="col">
+      <div class="card text-white bg-dark mb-3" style="width: 100%;">
+          <div class="card-body" style="padding: 0;">
+              <video #videoPlayer width="100%" height="100%"></video>
+          </div>
+      </div>
+
+      <button class="btn" [ngClass]="{'btn-dark': enableAudio, 'btn-danger': !enableAudio}" 
+        (click)="enableOrDisableAudio()">
+        Mute</button>
+      
+      <button class="btn" [ngClass]="{'btn-dark': enableVideo, 'btn-danger': !enableVideo}" 
+        (click)="enableOrDisableVideo()">
+        Camera</button>
+
+      <button class="btn btn-primary" 
+        (click)="connectToPeer(otherMember.knownAs)">
+        Connect to Peer</button>
+        
+      <button class="btn btn-danger" 
+        (click)="disconnectFromPeer()">
+        Disconnect</button>
+
+      <div *ngIf="waitingForPeerConnection" class="alert alert-info">
+        Oczekiwanie na połączenie z drugim użytkownikiem...
+      </div>
+
+      <video *ngIf="connections.length > 0" #remoteVideoPlayer width="100%" height="50%"></video>
+  </div>
+</div>

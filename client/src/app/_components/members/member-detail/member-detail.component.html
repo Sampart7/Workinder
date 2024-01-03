@@ -33,8 +33,9 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group d-flex">
-                    <button class="btn btn-primary">Like</button>
+                    <button (click)="addLike(member)" class="btn btn-dark">Like</button>
                     <button (click)="selectTab('Messages')" class="btn btn-dark">Message</button>
+                    <button (click)="selectTab('Videos')" class="btn btn-dark">Video</button>
                 </div>
             </div>
         </div>
@@ -54,8 +55,11 @@
             <tab heading='Photos' #photoTab="tab" (selectTab)="onTabActivated($event)">
                 <gallery *ngIf="photoTab.active" [items]="images"></gallery>
             </tab>
-            <tab heading='Messages' (selectTab)="onTabActivated($event)">
+            <tab heading='Messages' #messagesTab="tab" (selectTab)="onTabActivated($event)">
                 <app-member-messages [email]="member.email"></app-member-messages> 
+            </tab>
+            <tab heading='Videos' #videoTab="tab" (selectTab)="onTabActivated($event)">
+                <app-member-video [email]="member.email"></app-member-video> 
             </tab>
         </tabset>
     </div>

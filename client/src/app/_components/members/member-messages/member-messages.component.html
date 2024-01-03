@@ -1,94 +1,76 @@
 <div class="card">
-  <button class="btn btn-info" (click)="toggleView()">Switch View</button>
+  <div *ngIf="(messageService.messageThread | async)?.length === 0">
+    No messages yet... Say hi by using the message box below!
+  </div>
 
-    <div *ngIf="isChatView">
-      <div *ngIf="(messageService.messageThread | async)?.length === 0">
-        No messages yet... Say hi by using the message box below!
-      </div>
+  <ul 
+  #scrollMe
+  style="overflow-y: scroll; height: 450px;"
+  [scrollTop]="scrollMe.scrollHeight"
+  class="chat" *ngIf="(messageService.messageThread | async)!.length > 0">
+    <li *ngFor="let message of (messageService.messageThread | async)">
+        <span class="chat-img float-end">
+          <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="user photo">
+        </span>
 
-      <ul 
-      #scrollMe
-      style="overflow-y: scroll; height: 450px;"
-      [scrollTop]="scrollMe.scrollHeight"
-      class="chat" *ngIf="(messageService.messageThread | async)!.length > 0">
-        <li *ngFor="let message of (messageService.messageThread | async)">
-            <span class="chat-img float-end">
-              <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}" alt="user photo">
-            </span>
-
-            <div class="chat-body">
-              <div class="header">
-                <small class="text-muted">
-                  <span class="fa fa-clock-o"> {{message.timeSent | timeago}}</span>
-                  <span class="text-danger" *ngIf="!message.timeRead && message.senderEmail !== email">
-                    (unread)
-                  </span> 
-                  <span class="text-success" *ngIf="message.timeRead && message.senderEmail !== email">
-                    (read {{message.timeRead | timeago}})
-                  </span>
-                </small>
-              </div>
-
-              <p>{{message.content}}</p>
-            </div>
-        </li>
-      </ul>
-
-      <div class="card-footer">
-        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
-          <div class="input-group">
-            <input name="messageContent" required type="text" class="form-control input-sm" 
-              [(ngModel)]="messageContent" placeholder="Send a private message">
-
-            <div class="input-group-append">
-              <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
-            </div>
+        <div class="chat-body">
+          <div class="header">
+            <small class="text-muted">
+              <span class="fa fa-clock-o"> {{message.timeSent | timeago}}</span>
+              <span class="text-danger" *ngIf="!message.timeRead && message.senderEmail !== email">
+                (unread)
+              </span> 
+              <span class="text-success" *ngIf="message.timeRead && message.senderEmail !== email">
+                (read {{message.timeRead | timeago}})
+              </span>
+            </small>
           </div>
-        </form>
+
+          <p>{{message.content}}</p>
+        </div>
+    </li>
+  </ul>
+
+  <div class="card-footer">
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+      <div class="input-group">
+        <input name="messageContent" required type="text" class="form-control input-sm" 
+          [(ngModel)]="messageContent" placeholder="Send a private message">
+
+        <div class="input-group-append">
+          <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
+        </div>
       </div>
-
-    </div>
-
-    <!-- W momencie zmiany okna zmieniaj tylko cssa a nie całe działanie kodu -->
-    <!-- Będzie działać przysięgam -->
+    </form>
+  </div>
     
-    <div *ngIf="!isChatView">
-      <div class="row">
-        <div class="col-12">
-            <nav class="nav nav-pills nav-fill">
-              <button class="btn" [ngClass]="{'btn-dark': enableAudio, 'btn-danger': !enableAudio}" 
-                (click)="enableOrDisableAudio()">
-                Mute
-              </button>
-              
-              <button class="btn" [ngClass]="{'btn-dark': enableVideo, 'btn-danger': !enableVideo}" 
-                (click)="enableOrDisableVideo()">
-                Camera
-              </button>
-              
-            </nav>
-        </div>
-      </div>
-      
-      <div class="row mt-1">
-        <div class="col">
-            <div class="card text-white bg-dark mb-3" style="width: 100%;">
-                <div class="card-body" style="padding: 0;">
-                    <video #videoPlayer width="100%" height="100%" controls></video>
-                </div>
-            </div>
-      
-            <button class="btn btn-primary" 
-              (click)="connectToPeer(otherMember.knownAs)">
-              Connect to Peer</button>
-              
-            <button class="btn btn-danger" 
-              (click)="disconnectFromPeer()">
-              Disconnect</button>
-      
-            <video *ngIf="connections.length > 0" #remoteVideoPlayer width="100%" height="100%" controls></video>
-        </div>
+    <!-- <div class="row mt-1">
+      <div class="col">
+          <div class="card text-white bg-dark mb-3" style="width: 100%;">
+              <div class="card-body" style="padding: 0;">
+                  <video #videoPlayer width="100%" height="100%" controls></video>
+              </div>
+          </div>
+
+            <button class="btn" [ngClass]="{'btn-dark': enableAudio, 'btn-danger': !enableAudio}" 
+            (click)="enableOrDisableAudio()">
+            Mute
+          </button>
+          
+          <button class="btn" [ngClass]="{'btn-dark': enableVideo, 'btn-danger': !enableVideo}" 
+            (click)="enableOrDisableVideo()">
+            Camera
+          </button>
+    
+          <button class="btn btn-primary" 
+            (click)="connectToPeer(otherMember.knownAs)">
+            Connect to Peer</button>
+            
+          <button class="btn btn-danger" 
+            (click)="disconnectFromPeer()">
+            Disconnect</button>
+    
+          <video *ngIf="connections.length > 0" #remoteVideoPlayer width="100%" height="100%" controls></video>
       </div>
     </div>
-
-</div>
+  </div> -->

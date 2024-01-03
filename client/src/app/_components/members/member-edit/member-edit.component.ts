@@ -50,6 +50,7 @@ export class MemberEditComponent implements OnInit {
     this.memberService.addTag(this.newTagName).subscribe((response) => {
         this.member.tags.push(response);
         this.newTagName = '';
+        this.loadMember();
       });
   }
 
@@ -71,7 +72,7 @@ export class MemberEditComponent implements OnInit {
       next: () => {
         this.toastr.success('Profile updated successfully');
         this.editForm?.reset(this.member);
-        this.router.navigate(['/']);
+        this.loadMember();
       }
     })
   }

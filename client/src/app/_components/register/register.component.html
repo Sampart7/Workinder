@@ -45,7 +45,7 @@
         [label]='"Confirm Password"' [type]='"password"'></app-text-input>
     </div>
 
-    <input type="checkbox"> I agree to the terms and conditions
+    <input type="checkbox" formControlName="agreeToTerms" required> I agree to the terms and conditions
 
     <div class="row" *ngIf="validationErrors">
         <ul class="text-danger">
